@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="10"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="19" />
 
     <application
         android:allowBackup="true"
@@ -14,8 +14,9 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="es.rczone.reckoner.MainActivity"
-            android:label="@string/app_name" >
+            android:name="es.rczone.reckoner.activitys.GoogleCardsActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+    
+    <EditText android:id="@+id/etAmountA"
+   		style="@style/EstiloETCard"
+	    android:layout_weight="1" /> 
+	 
+    <TextView style="@style/EstiloETSeparador"
+	    android:layout_weight="0.1"/>
+    
+    <EditText android:id="@+id/etMeassureA"
+   		style="@style/EstiloETCard"
+	    android:layout_weight="1" />
+    
+    <TextView style="@style/EstiloETSeparador"
+	    android:layout_weight="0.1"/>
+    
+    <Button android:id="@+id/buscador_buscar_fecha"
+		style="@style/EstiloButtonCard"
+        android:layout_weight="3"
+        android:text="Convertir"
+        android:minHeight="0dp"
+		android:minWidth="0dp"/>
+    
+    <TextView style="@style/EstiloETSeparador"
+	    android:layout_weight="0.1"/>
+	
+	<EditText android:id="@+id/etAmountB"
+   		style="@style/EstiloETCard"
+	    android:layout_weight="1" />
+	
+	<TextView style="@style/EstiloETSeparador"
+	    android:layout_weight="0.1"/>
+	
+	<EditText android:id="@+id/etMeassureB"
+   		style="@style/EstiloETCard"
+	    android:layout_weight="1" />
+
+</LinearLayout>

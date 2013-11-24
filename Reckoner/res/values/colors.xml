@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_circulo">#7fffff00</color>
+    <color name="color_tema">#C0BDBD</color>  
+    <color name="color_boton_pressed">#FDC97A</color>
+    <color name="color_font_boton">#ffffff</color>
+    <color name="color_stroke_editext">#C0BDBD</color>
+    <color name="color_background_editText">#80000000</color>
+    <color name="color_background_editText_onfocus">#ffffff</color>
+          
+</resources>
+
+<!-- <color name="color_font_boton">#ffffff</color> -->
