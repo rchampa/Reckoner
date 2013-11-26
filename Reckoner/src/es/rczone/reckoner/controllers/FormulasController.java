@@ -83,7 +83,7 @@ public class FormulasController extends Controller{
 				//Make the changes persistence 
 				FormulaDAO dao = new FormulaDAO();
 				
-				ArrayList<Formula> friends = dao.getAllFriends();
+				ArrayList<Formula> friends = dao.getAllFormulas();
 				synchronized (model) {
 					//remove old elements
 					model.clear();

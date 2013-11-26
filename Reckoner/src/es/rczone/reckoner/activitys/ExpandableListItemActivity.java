@@ -1,48 +1,62 @@
 package es.rczone.reckoner.activitys;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.haarman.listviewanimations.itemmanipulation.ExpandableListItemAdapter;
-import com.haarman.listviewanimations.itemmanipulation.contextualundo.ContextualUndoAdapter;
 import com.haarman.listviewanimations.itemmanipulation.contextualundo.ContextualUndoAdapter.DeleteItemCallback;
 import com.haarman.listviewanimations.swinginadapters.prepared.ScaleInAnimationAdapter;
 
 import es.rczone.reckoner.R;
+import es.rczone.reckoner.activitys.customlayouts.MyLinearLayout;
+import es.rczone.reckoner.dao.FormulaDAO;
+import es.rczone.reckoner.model.Formula;
 
-public class ExpandableListItemActivity extends MyListActivity implements DeleteItemCallback{
+public class ExpandableListItemActivity extends BaseActivity implements DeleteItemCallback{
 
 	private MyExpandableListItemAdapter mExpandableListItemAdapter;
 	private boolean mLimited;
-
+	
+	private ListView mListView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		setContentView(R.layout.activity_mylist);
+		mListView = (ListView) findViewById(R.id.activity_mylist_listview);
+		mListView.setDivider(null);
 
-		mExpandableListItemAdapter = new MyExpandableListItemAdapter(this, getItems());
+		mExpandableListItemAdapter = new MyExpandableListItemAdapter(this, getItems_F());
 		ScaleInAnimationAdapter alphaInAnimationAdapter = new ScaleInAnimationAdapter(mExpandableListItemAdapter);
-		alphaInAnimationAdapter.setAbsListView(getListView());
+		alphaInAnimationAdapter.setAbsListView(mListView);
 		alphaInAnimationAdapter.setInitialDelayMillis(500);
-		getListView().setAdapter(alphaInAnimationAdapter);
+		mListView.setAdapter(alphaInAnimationAdapter);
 	
-		ContextualUndoAdapter adapter = new ContextualUndoAdapter(mExpandableListItemAdapter, R.layout.undo_row, R.id.undo_row_undobutton);
-		adapter.setAbsListView(getListView());
-		adapter.setDeleteItemCallback(this);
-		getListView().setAdapter(adapter);
+//		ContextualUndoAdapter adapter = new ContextualUndoAdapter(mExpandableListItemAdapter, R.layout.undo_row, R.id.undo_row_undobutton);
+//		adapter.setAbsListView(getListView());
+//		adapter.setDeleteItemCallback(this);
+//		getListView().setAdapter(adapter);
 		
 		
 
-		Toast.makeText(this, R.string.explainexpand, Toast.LENGTH_LONG).show();
+		Toast.makeText(this, R.string.explainexpand, Toast.LENGTH_SHORT).show();
+	}
+	
+	public ArrayList<Formula> getItems_F() {
+		return new FormulaDAO().getAllFormulas();
 	}
 	
 	
@@ -52,18 +66,19 @@ public class ExpandableListItemActivity extends MyListActivity implements Delete
 		mExpandableListItemAdapter.notifyDataSetChanged();
 	}
 
-	private static class MyExpandableListItemAdapter extends ExpandableListItemAdapter<Integer> {
+	private static class MyExpandableListItemAdapter extends ExpandableListItemAdapter<Formula> {
 
 		private Context mContext;
+		private List<Formula> items;
 
 		/**
 		 * Creates a new ExpandableListItemAdapter with the specified list, or an empty list if
 		 * items == null.
 		 */
-		private MyExpandableListItemAdapter(Context context, List<Integer> items) {
+		private MyExpandableListItemAdapter(Context context, List<Formula> items) {
 			super(context, R.layout.activity_expandablelistitem_card, R.id.activity_expandablelistitem_card_title, R.id.activity_expandablelistitem_card_content, items);
 			mContext = context;
-
+			this.items = items;
 		}
 
 		@Override
@@ -72,20 +87,21 @@ public class ExpandableListItemActivity extends MyListActivity implements Delete
 			if (tv == null) {
 				tv = new TextView(mContext);
 			}
-			tv.setText(mContext.getString(R.string.expandorcollapsecard, getItem(position)));
+			tv.setText(items.get(position).getFunctionFormula());
 			return tv;
 		}
 
 		@Override
 		public View getContentView(int position, View convertView, ViewGroup parent) {
-			ImageView imageView = (ImageView) convertView;
-			if (imageView == null) {
-				imageView = new ImageView(mContext);
-				imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+			MyLinearLayout linear = (MyLinearLayout) convertView;
+			if (linear == null) {
+				linear = new MyLinearLayout(mContext,LinearLayout.HORIZONTAL);
+				
+				Log.i("LinearLayout", "Nuevo objeto");
 			}
-
+			Log.i("LinearLayout", "Despliega");
 			
-			return imageView;
+			return linear;
 		}
 
 	}

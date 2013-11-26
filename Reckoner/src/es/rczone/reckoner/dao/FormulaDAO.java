@@ -18,7 +18,7 @@ public class FormulaDAO {
 	
 	
 	
-	public ArrayList<Formula> getAllFriends() {
+	public ArrayList<Formula> getAllFormulas() {
 		
 		ArrayList<Formula> list = new ArrayList<Formula>();
 		SQLiteDatabase db = new DatabaseHelper().getReadableDatabase();

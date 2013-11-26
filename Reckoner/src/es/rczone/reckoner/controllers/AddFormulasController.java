@@ -56,14 +56,13 @@ public class AddFormulasController extends Controller{
 		return r;
 	}
 
-	private boolean addFormula(final SparseArray<String> args) {
+	private boolean addFormula(SparseArray<String> args) {
 		
-		final String formula = args.get(GoogleCardsAdapter.FORMULA_FORMULA);
-		final String name = args.get(GoogleCardsAdapter.FORMULA_NAME);
+		String formula = args.get(GoogleCardsAdapter.FORMULA_FORMULA);
+		String name = args.get(GoogleCardsAdapter.FORMULA_NAME);
 		
-		Expr expr;
 		try {
-			expr = Parser.parse(formula);
+			Parser.parse(formula);
 		} catch (SyntaxException e) {
 			Log.e("Parser",e.explain());
 			return false;
