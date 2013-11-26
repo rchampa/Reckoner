@@ -4,6 +4,12 @@ import java.util.ArrayList;
 
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Log;
+import android.util.SparseArray;
+import es.rczone.dariuslib.me.Expr;
+import es.rczone.dariuslib.me.Parser;
+import es.rczone.dariuslib.me.SyntaxException;
+import es.rczone.reckoner.activitys.adapters.GoogleCardsAdapter;
 import es.rczone.reckoner.dao.FormulaDAO;
 import es.rczone.reckoner.model.Formula;
 
@@ -35,18 +41,33 @@ public class AddFormulasController extends Controller{
 	/**
 	 * This method receive message from view(activity) and notifies(with a boolean value) whether the message was received (handle)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean handleMessage(int what, Object data) {
+		boolean r = false;
 		switch(what) {
 							
 			case MESSAGE_ADD_FORMULA:
-				return addFormula((String)data);
+				r = addFormula((SparseArray<String>)data);//WTF
+				break;
+			case 33: break;
 			
 		}
-		return false;
+		return r;
 	}
 
-	private boolean addFormula(final String formula) {
+	private boolean addFormula(final SparseArray<String> args) {
+		
+		final String formula = args.get(GoogleCardsAdapter.FORMULA_FORMULA);
+		final String name = args.get(GoogleCardsAdapter.FORMULA_NAME);
+		
+		Expr expr;
+		try {
+			expr = Parser.parse(formula);
+		} catch (SyntaxException e) {
+			Log.e("Parser",e.explain());
+			return false;
+		}
 		
 		final ArrayList<String> varList = new ArrayList<String>();
 		char l;
@@ -61,16 +82,10 @@ public class AddFormulasController extends Controller{
 		if(varList.size()==0)
 			return false;
 		
-		workerHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				Formula f = new Formula("", formula, varList);
-				FormulaDAO dao = new FormulaDAO();
-				dao.insert(f);
-				
-			}
-		});
-		
+		Formula f = new Formula(name, formula, varList);
+		FormulaDAO dao = new FormulaDAO();
+		dao.insert(f);
+	
 		return true;
 	}
 

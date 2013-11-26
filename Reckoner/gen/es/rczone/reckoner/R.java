@@ -1048,6 +1048,7 @@ containing a value of this type.
         public static final int image=0x7f050027;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
+        public static final int menu_expandable_limit=0x7f05004e;
         public static final int middle=0x7f050012;
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
@@ -1143,6 +1144,7 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
+        public static final int menu_expandablelistitem=0x7f0d0001;
     }
     public static final class plurals {
         public static final int countdown_seconds=0x7f0c0000;
