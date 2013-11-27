@@ -37,4 +37,8 @@ public class Formula {
 			return variables;
 	}
 	
+	public int getNumVars(){
+		return variables.size();
+	}
+	
 }

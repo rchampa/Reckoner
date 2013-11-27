@@ -20,7 +20,7 @@ import com.haarman.listviewanimations.itemmanipulation.contextualundo.Contextual
 import com.haarman.listviewanimations.swinginadapters.prepared.ScaleInAnimationAdapter;
 
 import es.rczone.reckoner.R;
-import es.rczone.reckoner.activitys.customlayouts.MyLinearLayout;
+import es.rczone.reckoner.activitys.customlayouts.FormulaLayout;
 import es.rczone.reckoner.dao.FormulaDAO;
 import es.rczone.reckoner.model.Formula;
 
@@ -93,9 +93,9 @@ public class ExpandableListItemActivity extends BaseActivity implements DeleteIt
 
 		@Override
 		public View getContentView(int position, View convertView, ViewGroup parent) {
-			MyLinearLayout linear = (MyLinearLayout) convertView;
+			FormulaLayout linear = (FormulaLayout) convertView;
 			if (linear == null) {
-				linear = new MyLinearLayout(mContext,LinearLayout.HORIZONTAL);
+				linear = new FormulaLayout(mContext,LinearLayout.HORIZONTAL, items.get(position));
 				
 				Log.i("LinearLayout", "Nuevo objeto");
 			}

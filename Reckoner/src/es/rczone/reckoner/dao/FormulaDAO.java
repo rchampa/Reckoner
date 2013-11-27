@@ -2,11 +2,10 @@ package es.rczone.reckoner.dao;
 
 import java.util.ArrayList;
 
-import es.rczone.reckoner.model.Formula;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import es.rczone.reckoner.model.Formula;
 
 
 public class FormulaDAO {

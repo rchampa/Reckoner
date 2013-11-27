@@ -49,6 +49,8 @@ public class GoogleCardsAdapter extends ArrayAdapter<String> {
 			boolean isOk = GoogleCardsAdapter.this.controller.handleMessage(AddFormulasController.MESSAGE_ADD_FORMULA, args);
 			if(isOk){
 				Toast.makeText(mContext, "Yor Formula was added succesfully.", Toast.LENGTH_SHORT).show();
+				formulaName.setText("");
+				etFormula.setText("");
 			}
 			else
 				Toast.makeText(mContext, "Invalid format.", Toast.LENGTH_SHORT).show();
