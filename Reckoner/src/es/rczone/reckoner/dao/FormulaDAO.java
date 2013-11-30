@@ -12,6 +12,7 @@ public class FormulaDAO {
 	
 	protected static final String TABLE = "formulas";
 	protected static final String NAME = "name";
+	protected static final String PATH = "path";
 	protected static final String FORMULA = "formula";
 	protected static final String VARIABLES = "variables";
 	

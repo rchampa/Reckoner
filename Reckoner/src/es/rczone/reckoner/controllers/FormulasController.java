@@ -58,18 +58,6 @@ public class FormulasController extends Controller{
 		return false;
 	}
 
-	private void addFriend(final Formula friend) {
-		workerHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				synchronized (friend) {
-					FormulaDAO dao = new FormulaDAO();
-					dao.insert(friend);
-				}
-			}
-		});
-		
-	}
 
 	private void deleteCounter(Integer data) {
 		// TODO Auto-generated method stub

@@ -152,7 +152,7 @@ public class Parser {
 	return expr;
     }
 
-    static private final String[] procs1 = {
+    static public final String[] procs1 = {
 	"abs", "acos", "asin", "atan", 
 	"ceil", "cos", "exp", "floor", 
 	"log", "round", "sin", "sqrt", 
@@ -165,7 +165,7 @@ public class Parser {
 	Expr.TAN
     };
 	
-    static private final String[] procs2 = {
+    static public final String[] procs2 = {
 	"atan2", "max", "min"
     };
     static private final int[] rators2 = {

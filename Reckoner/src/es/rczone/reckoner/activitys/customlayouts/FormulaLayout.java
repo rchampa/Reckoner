@@ -21,17 +21,15 @@ import es.rczone.reckoner.model.Formula;
  */
 public class FormulaLayout extends LinearLayout implements OnChangeValueListener{
 	
-	private Context context;
 	private List<MyButton> listButtons;
 	private String formula;
 	private TextView label;
 	
 	private boolean isChecked;
 	private Expr expr;
-
+	
 	public FormulaLayout(Context context, int orientation, Formula formula) {
 		super(context);
-		this.context = context;
 		this.formula = formula.getFunctionFormula();
 		isChecked = false;
 		listButtons = new ArrayList<MyButton>(formula.getNumVars());
@@ -40,14 +38,14 @@ public class FormulaLayout extends LinearLayout implements OnChangeValueListener
 		float result_weight = total_weight/5f;
 		float var_weight = (total_weight-result_weight)/(float)formula.getNumVars();
 		
-		MyButton tv;
-		
+		MyButton tv;	
 		for(String var : formula.getVariables()){
 			tv = new MyButton(context,var,this);
 	        tv.setLayoutParams(new LayoutParams(0, LayoutParams.WRAP_CONTENT, var_weight));
 	        this.addView(tv);
 	        listButtons.add(tv);
 		}
+
 		
 		label = new TextView(context);
 		label.setLayoutParams(new LayoutParams(0, LayoutParams.WRAP_CONTENT, result_weight));
@@ -63,8 +61,8 @@ public class FormulaLayout extends LinearLayout implements OnChangeValueListener
 				return;
 			}
 			else{
-				var = Variable.make(button.getName());
-				var.setValue(button.getValue());
+				var = Variable.make(b.getName());
+				var.setValue(b.getValue());
 			}
 		}
 		
@@ -80,7 +78,7 @@ public class FormulaLayout extends LinearLayout implements OnChangeValueListener
 			}
 		}
 		
-		label.setText(" "+expr.value());
+		label.setText("  "+expr.value());
 				
 	}
 	

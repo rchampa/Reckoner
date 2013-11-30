@@ -3,8 +3,11 @@ package es.rczone.reckoner.model;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.os.Environment;
+
 public class Formula {
 	
+	public static String PATH_FOLDER = Environment.getExternalStorageDirectory().getPath()+"/formulas/images/";
 	private String name;
 	private String formula;
 	private ArrayList<String> variables;
@@ -34,11 +37,17 @@ public class Formula {
 	}
 	
 	public Iterable<String> getVariables(){
-			return variables;
+		return variables;
 	}
 	
 	public int getNumVars(){
 		return variables.size();
 	}
+
+	@Override
+	public String toString() {
+		return "Formula [formula=" + formula + ", variables=" + variables + "]";
+	}
+
 	
 }

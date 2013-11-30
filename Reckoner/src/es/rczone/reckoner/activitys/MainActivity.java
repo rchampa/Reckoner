@@ -29,6 +29,11 @@ public class MainActivity extends Activity {
             	intent = new Intent(this, ExpandableListItemActivity.class);
             	startActivity(intent);
             	break;
+            	
+            case R.id.button3:
+            	intent = new Intent(this, TestActivity.class);
+            	startActivity(intent);
+            	break;
 		}
 	}
 
