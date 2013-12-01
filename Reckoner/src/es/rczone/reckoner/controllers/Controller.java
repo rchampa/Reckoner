@@ -9,10 +9,10 @@ import android.os.Message;
 abstract class Controller {
 	
 	private final List<Handler> outboxHandlers = new ArrayList<Handler>();
-	
+	protected String errorMessage;
 
 	public Controller() {
-		
+		errorMessage="";
 	}
 	
 	public void dispose() {}
@@ -38,5 +38,9 @@ abstract class Controller {
 				msg.sendToTarget();
 			}
 		}
+	}
+	
+	public String getErrorMessage(){
+		return this.errorMessage;
 	}
 }

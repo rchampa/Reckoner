@@ -4,17 +4,19 @@ import java.util.ArrayList;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import es.rczone.reckoner.model.Formula;
 
 
 public class FormulaDAO {
 	
-	protected static final String TABLE = "formulas";
-	protected static final String NAME = "name";
-	protected static final String PATH = "path";
-	protected static final String FORMULA = "formula";
-	protected static final String VARIABLES = "variables";
+	static final String TABLE = "formulas";
+	static final String NAME = "name";
+	static final String PATH = "path";
+	static final String FORMULA = "formula";
+	static final String VARIABLES = "variables";
 	
 	
 	
@@ -76,7 +78,7 @@ public class FormulaDAO {
 	}
 	
 	//Create
-	public long insert(Formula formula) {
+	public boolean insert(Formula formula) {
 		SQLiteDatabase db = new DatabaseHelper().getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(NAME, formula.getName());
@@ -89,9 +91,23 @@ public class FormulaDAO {
 		
 		values.put(VARIABLES, vars);
 		
-		long num = db.insert(TABLE, null, values);
-		db.close();
-		return num;
+		long num=-1;
+		
+		try{
+			num = db.insertOrThrow(TABLE, null, values);
+			db.close();
+			if(num!=-1)
+				return true;
+			else
+				return false;
+				
+			
+		} catch (SQLiteConstraintException e) {
+	        Log.d("FormulaDAO", "failure to insert formula", e);
+	    	db.close();
+			return false;
+	    }
+		
 	}
 	
 	//Update

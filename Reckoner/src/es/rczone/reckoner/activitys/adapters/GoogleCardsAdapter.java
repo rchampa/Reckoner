@@ -43,17 +43,34 @@ public class GoogleCardsAdapter extends ArrayAdapter<String> {
 
 		@Override
 		public void onClick(View v) {
+			
+			String name = formulaName.getText().toString().trim();
+			String formula = etFormula.getText().toString().trim();
+			
+			if("".equals(name)){
+				Toast.makeText(mContext, "Please fill the name", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			
+			if("".equals(formula)){
+				Toast.makeText(mContext, "Please fill the formula", Toast.LENGTH_SHORT).show();
+				return;
+			}
+				
+			
 			SparseArray<String> args = new SparseArray<String>(2);
-			args.put(FORMULA_NAME, formulaName.getText().toString());
-			args.put(FORMULA_FORMULA, etFormula.getText().toString());
+			args.put(FORMULA_NAME, name);
+			args.put(FORMULA_FORMULA, formula);
 			boolean isOk = GoogleCardsAdapter.this.controller.handleMessage(AddFormulasController.MESSAGE_ADD_FORMULA, args);
 			if(isOk){
-				Toast.makeText(mContext, "Yor Formula was added succesfully.", Toast.LENGTH_SHORT).show();
+				Toast.makeText(mContext, "Your formula was added succesfully.", Toast.LENGTH_SHORT).show();
 				formulaName.setText("");
 				etFormula.setText("");
 			}
-			else
-				Toast.makeText(mContext, "Invalid format.", Toast.LENGTH_SHORT).show();
+			else{
+				String msg = GoogleCardsAdapter.this.controller.getErrorMessage();
+				Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+			}
 		}
 		
 	};

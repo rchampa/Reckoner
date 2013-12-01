@@ -52,7 +52,7 @@ public class AddFormulasController extends Controller{
 		switch(what) {
 							
 			case MESSAGE_ADD_FORMULA:
-				r = addFormula((SparseArray<String>)data);//WTF
+				r = addFormula((SparseArray<String>)data);
 				break;
 			case 33: break;
 			
@@ -63,12 +63,13 @@ public class AddFormulasController extends Controller{
 	private boolean addFormula(SparseArray<String> args) {
 		
 		final String formula = args.get(GoogleCardsAdapter.FORMULA_FORMULA);
-		final String name = args.get(GoogleCardsAdapter.FORMULA_NAME);
+		final String name = args.get(GoogleCardsAdapter.FORMULA_NAME).trim();
 		
 		try {
 			Parser.parse(formula);
 		} catch (SyntaxException e) {
 			Log.e("Parser",e.explain());
+			errorMessage = e.explain();
 			return false;
 		}
 		
@@ -102,7 +103,11 @@ public class AddFormulasController extends Controller{
 		
 		Formula f = new Formula(name, formula, varList);
 		FormulaDAO dao = new FormulaDAO();
-		dao.insert(f);
+		boolean query = dao.insert(f);
+		if(!query) {
+			errorMessage = "There is a formula with the same name, please use another name.";
+			return false;
+		}
 		
 		workerHandler.post(new Runnable() {
 			@Override
@@ -111,9 +116,7 @@ public class AddFormulasController extends Controller{
 			}
 		});
 		
-		
-	
-		return true;
+		return query;
 	}
 
 }

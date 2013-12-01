@@ -25,7 +25,16 @@ final class DatabaseHelper extends SQLiteOpenHelper {
 								FormulaDAO.FORMULA + " varchar(100) not null, " +
 								FormulaDAO.FORMULA + " varchar(100) not null, " +
 								FormulaDAO.VARIABLES + " varchar(20) not null)";
+		
+		
+		final String formulasList = "CREATE TABLE " + FormulasListDAO.TABLE + "(" + 
+								FormulasListDAO.NAME + " varchar(25), " +
+								FormulasListDAO.FORMULA_NAME + " varchar(25), " +
+								"PRIMARY KEY ("+FormulasListDAO.NAME+", "+FormulasListDAO.FORMULA_NAME+") )";
+		
+		
 		database.execSQL(formulas);
+		database.execSQL(formulasList);
 		
 	}
 
