@@ -3,37 +3,32 @@ package es.rczone.reckoner.activitys;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBar.OnNavigationListener;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.os.Handler;
+import android.os.Message;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.haarman.listviewanimations.ArrayAdapter;
 import com.haarman.listviewanimations.swinginadapters.AnimationAdapter;
 import com.haarman.listviewanimations.swinginadapters.prepared.ScaleInAnimationAdapter;
 
 import es.rczone.reckoner.R;
-import es.rczone.reckoner.activitys.adapters.AddFormulaAdapter;
-import es.rczone.reckoner.controllers.AddFormulasController;
+import es.rczone.reckoner.activitys.adapters.AddFormulasListAdapter;
+import es.rczone.reckoner.controllers.AddFormulasListController;
 
-public class AddFormulaActivity extends BaseActivity {
+public class AddFormulasListActivity extends BaseActivity implements Handler.Callback{
 	
-	private AddFormulaAdapter mGoogleCardsAdapter;
-	private AddFormulasController controller;
+	private AddFormulasListAdapter mGoogleCardsAdapter;
+	private AddFormulasListController controller;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_googlecards);
 
-		controller = new AddFormulasController(); 
+		controller = new AddFormulasListController(); 
 		
 		ListView listView = (ListView) findViewById(R.id.activity_googlecards_listview);
 
-		mGoogleCardsAdapter = new AddFormulaAdapter(this,controller);
+		mGoogleCardsAdapter = new AddFormulasListAdapter(this,controller);
 
 		AnimationAdapter animAdapter = new ScaleInAnimationAdapter(mGoogleCardsAdapter);
 		animAdapter.setAbsListView(listView);
@@ -48,10 +43,24 @@ public class AddFormulaActivity extends BaseActivity {
 	private ArrayList<String> getItems() {
 		ArrayList<String> items = new ArrayList<String>();
 		items.add("Name");
-		items.add("Formula");
 		items.add("Buttons");
 		
 		return items;
+	}
+
+	@Override
+	public boolean handleMessage(Message message) {
+		switch(message.what) {
+		case AddFormulasListController.MESSAGE_TO_VIEW_MODEL_UPDATED:
+			this.runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					
+				}
+			});
+			return true;
+		}
+		return false;
 	}
 	
 }

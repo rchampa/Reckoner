@@ -9,7 +9,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.util.LruCache;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.OnNavigationListener;
 import android.util.SparseArray;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.haarman.listviewanimations.ArrayAdapter;
 import com.haarman.listviewanimations.itemmanipulation.ExpandableListItemAdapter;
 import com.haarman.listviewanimations.itemmanipulation.contextualundo.ContextualUndoAdapter.DeleteItemCallback;
 import com.haarman.listviewanimations.swinginadapters.prepared.ScaleInAnimationAdapter;
@@ -30,7 +34,7 @@ import es.rczone.reckoner.dao.FormulaDAO;
 import es.rczone.reckoner.model.Formula;
 import es.rczone.reckoner.tools.Tools;
 
-public class ExpandableListItemActivity extends BaseActivity implements DeleteItemCallback{
+public class FormulasListActivity extends BaseActivity implements DeleteItemCallback, OnNavigationListener{
 
 	private MyExpandableListItemAdapter mExpandableListItemAdapter;
 	private boolean mLimited;
@@ -57,10 +61,10 @@ public class ExpandableListItemActivity extends BaseActivity implements DeleteIt
 		alphaInAnimationAdapter.setInitialDelayMillis(500);
 		mListView.setAdapter(alphaInAnimationAdapter);
 	
-//		ContextualUndoAdapter adapter = new ContextualUndoAdapter(mExpandableListItemAdapter, R.layout.undo_row, R.id.undo_row_undobutton);
-//		adapter.setAbsListView(getListView());
-//		adapter.setDeleteItemCallback(this);
-//		getListView().setAdapter(adapter);
+
+		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		getSupportActionBar().setListNavigationCallbacks(new FormulasListAdapter(), this);
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		
 		
 
@@ -125,8 +129,8 @@ public class ExpandableListItemActivity extends BaseActivity implements DeleteIt
 				Bitmap bitmap = getBitmapFromMemCache(position);
 				if (bitmap == null) {
 					bitmap = BitmapFactory.decodeFile(f.getAbsolutePath());
-					double height = bitmap.getHeight()*1.8d;
-					double width = bitmap.getWidth()*1.8d;
+					double height = bitmap.getHeight()*1.6d;
+					double width = bitmap.getWidth()*1.6d;
 					bitmap = Tools.getResizedBitmap(bitmap, (int)height, (int)width);
 					addBitmapToMemoryCache(position, bitmap);
 				}
@@ -184,6 +188,31 @@ public class ExpandableListItemActivity extends BaseActivity implements DeleteIt
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	private class FormulasListAdapter extends ArrayAdapter<String> {
+
+		public FormulasListAdapter() {
+			addAll("Alpha", "Left", "Right", "Bottom", "Bottom right", "Scale");
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			TextView tv = (TextView) convertView;
+			if (tv == null) {
+				tv = (TextView) LayoutInflater.from(FormulasListActivity.this).inflate(android.R.layout.simple_list_item_1, parent, false);
+			}
+
+			tv.setText(getItem(position));
+
+			return tv;
+		}
+	}
+
+	@Override
+	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

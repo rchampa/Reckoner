@@ -1,18 +1,14 @@
 package es.rczone.reckoner.controllers;
 
-import java.io.File;
 import java.util.ArrayList;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
 import android.util.SparseArray;
 import es.rczone.dariuslib.me.Parser;
 import es.rczone.dariuslib.me.SyntaxException;
-import es.rczone.reckoner.activitys.adapters.GoogleCardsAdapter;
+import es.rczone.reckoner.activitys.adapters.AddFormulaAdapter;
 import es.rczone.reckoner.dao.FormulaDAO;
 import es.rczone.reckoner.model.Formula;
 import es.rczone.reckoner.tools.Tools;
@@ -62,8 +58,8 @@ public class AddFormulasController extends Controller{
 
 	private boolean addFormula(SparseArray<String> args) {
 		
-		final String formula = args.get(GoogleCardsAdapter.FORMULA_FORMULA);
-		final String name = args.get(GoogleCardsAdapter.FORMULA_NAME).trim();
+		final String formula = args.get(AddFormulaAdapter.FORMULA_FORMULA);
+		final String name = args.get(AddFormulaAdapter.FORMULA_NAME).trim();
 		
 		try {
 			Parser.parse(formula);

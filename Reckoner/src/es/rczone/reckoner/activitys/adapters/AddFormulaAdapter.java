@@ -15,7 +15,10 @@ import com.haarman.listviewanimations.ArrayAdapter;
 import es.rczone.reckoner.R;
 import es.rczone.reckoner.controllers.AddFormulasController;
 
-public class GoogleCardsAdapter extends ArrayAdapter<String> {
+/*
+ * ArrayAdapter has the Google Card Style 
+ */
+public class AddFormulaAdapter extends ArrayAdapter<String> {
 	
 	public static final int FORMULA_NAME = 0;
 	public static final int FORMULA_FORMULA = 1;
@@ -33,7 +36,7 @@ public class GoogleCardsAdapter extends ArrayAdapter<String> {
 	private Button addButton;
 	
 
-	public GoogleCardsAdapter(Context context, AddFormulasController controller) {
+	public AddFormulaAdapter(Context context, AddFormulasController controller) {
 		mContext = context;
 		this.controller = controller;
 	}
@@ -61,14 +64,14 @@ public class GoogleCardsAdapter extends ArrayAdapter<String> {
 			SparseArray<String> args = new SparseArray<String>(2);
 			args.put(FORMULA_NAME, name);
 			args.put(FORMULA_FORMULA, formula);
-			boolean isOk = GoogleCardsAdapter.this.controller.handleMessage(AddFormulasController.MESSAGE_ADD_FORMULA, args);
+			boolean isOk = AddFormulaAdapter.this.controller.handleMessage(AddFormulasController.MESSAGE_ADD_FORMULA, args);
 			if(isOk){
 				Toast.makeText(mContext, "Your formula was added succesfully.", Toast.LENGTH_SHORT).show();
 				formulaName.setText("");
 				etFormula.setText("");
 			}
 			else{
-				String msg = GoogleCardsAdapter.this.controller.getErrorMessage();
+				String msg = AddFormulaAdapter.this.controller.getErrorMessage();
 				Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
 			}
 		}
@@ -91,7 +94,7 @@ public class GoogleCardsAdapter extends ArrayAdapter<String> {
 	private View prepareCardNameFormula(View convertView, ViewGroup parent){
 		
 		if (formulaNameCard == null) {
-			formulaNameCard = LayoutInflater.from(mContext).inflate(R.layout.activity_googlecards_formula_name, parent, false);
+			formulaNameCard = LayoutInflater.from(mContext).inflate(R.layout.googlecard_formula_name, parent, false);
 			formulaName = (EditText) formulaNameCard.findViewById(R.id.activity_googlecards_card_et_formula_name);
 			
 		} 
@@ -106,7 +109,7 @@ public class GoogleCardsAdapter extends ArrayAdapter<String> {
 	private View prepareCardFormula(View convertView, ViewGroup parent){
 		
 		if (formulaCard == null) {
-			formulaCard = LayoutInflater.from(mContext).inflate(R.layout.activity_googlecards_add_formula, parent, false);
+			formulaCard = LayoutInflater.from(mContext).inflate(R.layout.googlecard_add_formula, parent, false);
 			etFormula = (EditText) formulaCard.findViewById(R.id.activity_googlecards_card_et_formula);
 		} 
 		
@@ -119,7 +122,7 @@ public class GoogleCardsAdapter extends ArrayAdapter<String> {
 	private View prepareCardFormulaButtons(View convertView, ViewGroup parent){
 
 		if (buttonsCard == null) {
-			buttonsCard = LayoutInflater.from(mContext).inflate(R.layout.activity_googlecards_buttons, parent, false);
+			buttonsCard = LayoutInflater.from(mContext).inflate(R.layout.googlecard_add_formula_buttons, parent, false);
 			addButton = (Button) buttonsCard.findViewById(R.id.buttton_add_formula);
 			addButton.setOnClickListener(addFormulaOnClick);			
 		} 

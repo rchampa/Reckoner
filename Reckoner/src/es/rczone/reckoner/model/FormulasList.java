@@ -9,11 +9,23 @@ public class FormulasList {
 	private ArrayList<Formula> list;
 	
 	
-	public FormulasList(String name, ArrayList<Formula> list){
+	public FormulasList(String name){
 		this.name = name;
-		this.list = new ArrayList<Formula>(list);
+		this.list = new ArrayList<Formula>();
 		
 	}
 	
+	
+	public void addFormula(Formula f){
+		list.add(f);
+	}
+	
+	public String getName(){
+		return this.name;
+	}
+	
+	public int size(){
+		return list.size();
+	}
 
 }

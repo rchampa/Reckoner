@@ -37,4 +37,12 @@
     <string name="buttton_add_variables">Add variables</string>
     <string name="buttton_add_variable">Add</string>
     
+    <!-- FormulasListActivity -->
+    <string name="hint_formulasList_name">Name of the list</string>
+    <string name="buttton_add_formulasList">Edit list</string>
+    
+    <!-- FormulasPickerActivity -->
+    <string name="buttton_save_formulasList">Save list</string>
+    
+    
 </resources>

@@ -26,12 +26,12 @@ public class MainActivity extends Activity {
 	        	break;
 		
             case R.id.button2:
-            	intent = new Intent(this, ExpandableListItemActivity.class);
+            	intent = new Intent(this, FormulasListActivity.class);
             	startActivity(intent);
             	break;
             	
             case R.id.button3:
-            	intent = new Intent(this, TestActivity.class);
+            	intent = new Intent(this,AddFormulasListActivity.class);
             	startActivity(intent);
             	break;
 		}
