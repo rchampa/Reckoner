@@ -1,5 +1,8 @@
 package es.rczone.reckoner.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
@@ -14,6 +17,8 @@ public class FormulasListDAO {
 	static final String NAME = "name";
 	static final String FORMULA_NAME = "formula_name";
 	
+	
+	//Read
 	public FormulasList get(String name) {
 		SQLiteDatabase db = new DatabaseHelper().getReadableDatabase();
 		Cursor cursor = db.query(TABLE, null, NAME+"=?", new String[] {name}, null, null, null);
@@ -35,6 +40,34 @@ public class FormulasListDAO {
 		if(valueObject.size()==0) return null;
 		
 		return valueObject;
+	}
+	
+	//Read
+	public List<Formula> getRemainingFormulas(String name) {
+		
+		String QUERY = "SELECT DISTINCT f.name as f_name FROM formulas f where f.name not in (select formula_name from formulas_list l where l.name=?)";
+				
+		
+		SQLiteDatabase db = new DatabaseHelper().getReadableDatabase();
+		Cursor cursor = db.rawQuery(QUERY, new String[]{name});
+		
+		
+		List<Formula> list = new ArrayList<Formula>();
+		Formula f;
+		String formulaName;
+		if (cursor.moveToFirst()) {
+			formulaName = cursor.getString(cursor.getColumnIndex("f_name"));
+			
+			f = new FormulaDAO().get(formulaName);
+			list.add(f);			
+		}
+		
+		cursor.close();
+		db.close();
+		
+		if(list.size()==0) return null;
+		
+		return list;
 	}
 	
 	//Create

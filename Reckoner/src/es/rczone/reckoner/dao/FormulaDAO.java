@@ -14,7 +14,6 @@ public class FormulaDAO {
 	
 	static final String TABLE = "formulas";
 	static final String NAME = "name";
-	static final String PATH = "path";
 	static final String FORMULA = "formula";
 	static final String VARIABLES = "variables";
 	

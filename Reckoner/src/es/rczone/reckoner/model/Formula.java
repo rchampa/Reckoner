@@ -46,7 +46,7 @@ public class Formula {
 
 	@Override
 	public String toString() {
-		return "Formula [formula=" + formula + ", variables=" + variables + "]";
+		return name+" [formula=" + formula + ", variables=" + variables + "]";
 	}
 
 	
