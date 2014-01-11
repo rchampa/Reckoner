@@ -3,7 +3,8 @@ package es.rczone.reckoner.controllers;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.SparseArray;
-import es.rczone.reckoner.activitys.adapters.AddFormulasListAdapter;
+import es.rczone.reckoner.activitys.AddFormulasListActivity;
+import es.rczone.reckoner.dao.RFormulaListDAO;
 
 
 public class AddFormulasListController extends Controller{
@@ -42,7 +43,7 @@ public class AddFormulasListController extends Controller{
 		switch(what) {
 							
 			case MESSAGE_ADD_FORMULAS_LIST:
-				r = addFormula((SparseArray<String>)data);
+				r = addFormulaList((SparseArray<String>)data);
 				break;
 			case 33: break;
 			
@@ -50,10 +51,11 @@ public class AddFormulasListController extends Controller{
 		return r;
 	}
 
-	private boolean addFormula(SparseArray<String> args) {
+	private boolean addFormulaList(SparseArray<String> args) {
 		
-		final String name = args.get(AddFormulasListAdapter.LIST_NAME).trim();
-		return true;
+		String name = args.get(AddFormulasListActivity.LIST_NAME).trim();
+		
+		return new RFormulaListDAO().exists(name);
 	}
 	
 	private void addFormulas() {

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/card_background_white"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp" >
 
@@ -14,6 +14,12 @@
         android:textSize="20sp"
         android:hint="@string/hint_formulasList_name"
         android:inputType="none"  />
+    
+     <Button android:id="@+id/buttton_add_formulas_list"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/buttton_add_formulasList"
+    />
 
 
 </LinearLayout>

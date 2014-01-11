@@ -11,9 +11,9 @@ import android.util.Log;
 import es.rczone.reckoner.model.Formula;
 import es.rczone.reckoner.model.FormulasList;
 
-public class FormulasListDAO {
+public class RFormulaListDAO {
 	
-	static final String TABLE = "formulas_list";
+	static final String TABLE = "r_formula_list";
 	static final String NAME = "name";
 	static final String FORMULA_NAME = "formula_name";
 	
@@ -26,7 +26,7 @@ public class FormulasListDAO {
 		FormulasList valueObject = new FormulasList(name);
 		Formula f;
 		String formulaName;
-		if (cursor.moveToFirst()) {
+		while (cursor.moveToFirst()) {
 			name = cursor.getString(cursor.getColumnIndex(NAME));
 			formulaName = cursor.getString(cursor.getColumnIndex(FORMULA_NAME));
 			
@@ -45,7 +45,7 @@ public class FormulasListDAO {
 	//Read
 	public List<Formula> getRemainingFormulas(String name) {
 		
-		String QUERY = "SELECT DISTINCT f.name as f_name FROM formulas f where f.name not in (select formula_name from formulas_list l where l.name=?)";
+		String QUERY = "SELECT DISTINCT f.name as f_name FROM "+FormulaDAO.TABLE+" f where f.name not in (select formula_name from "+TABLE+" l where l.name=?)";
 				
 		
 		SQLiteDatabase db = new DatabaseHelper().getReadableDatabase();
@@ -55,7 +55,7 @@ public class FormulasListDAO {
 		List<Formula> list = new ArrayList<Formula>();
 		Formula f;
 		String formulaName;
-		if (cursor.moveToFirst()) {
+		while (cursor.moveToFirst()) {
 			formulaName = cursor.getString(cursor.getColumnIndex("f_name"));
 			
 			f = new FormulaDAO().get(formulaName);
@@ -68,6 +68,44 @@ public class FormulasListDAO {
 		if(list.size()==0) return null;
 		
 		return list;
+	}
+	
+	public List<String> getNamesOfAllFormulasList() {
+		
+		String QUERY = "SELECT DISTINCT name from formulas_list";
+				
+		
+		SQLiteDatabase db = new DatabaseHelper().getReadableDatabase();
+		Cursor cursor = db.rawQuery(QUERY, null);
+		
+		
+		List<String> list = new ArrayList<String>();
+		String formulaListName;
+		while (cursor.moveToFirst()) {
+			formulaListName = cursor.getString(cursor.getColumnIndex(NAME));
+			list.add(formulaListName);			
+		}
+		
+		cursor.close();
+		db.close();
+		
+		return list;
+	}
+	
+	public boolean exists(String name) {
+		SQLiteDatabase db = new DatabaseHelper().getReadableDatabase();
+		Cursor cursor = db.query(TABLE, null, NAME+"=?", new String[] {name}, null, null, null);
+		
+		boolean exists = false;
+		
+		if (cursor.moveToFirst()) {
+			exists = true;			
+		}
+		
+		cursor.close();
+		db.close();
+		
+		return exists;
 	}
 	
 	//Create

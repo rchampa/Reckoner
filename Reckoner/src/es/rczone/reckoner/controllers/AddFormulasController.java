@@ -8,7 +8,7 @@ import android.util.Log;
 import android.util.SparseArray;
 import es.rczone.dariuslib.me.Parser;
 import es.rczone.dariuslib.me.SyntaxException;
-import es.rczone.reckoner.activitys.adapters.AddFormulaAdapter;
+import es.rczone.reckoner.activitys.AddFormulaActivity;
 import es.rczone.reckoner.dao.FormulaDAO;
 import es.rczone.reckoner.model.Formula;
 import es.rczone.reckoner.tools.Tools;
@@ -58,8 +58,8 @@ public class AddFormulasController extends Controller{
 
 	private boolean addFormula(SparseArray<String> args) {
 		
-		final String formula = args.get(AddFormulaAdapter.FORMULA_FORMULA);
-		final String name = args.get(AddFormulaAdapter.FORMULA_NAME).trim();
+		final String formula = args.get(AddFormulaActivity.FORMULA_FORMULA);
+		final String name = args.get(AddFormulaActivity.FORMULA_NAME).trim();
 		
 		try {
 			Parser.parse(formula);

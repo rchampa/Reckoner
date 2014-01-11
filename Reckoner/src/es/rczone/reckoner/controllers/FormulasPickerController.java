@@ -4,7 +4,7 @@ import java.util.List;
 
 import android.os.Handler;
 import android.os.HandlerThread;
-import es.rczone.reckoner.dao.FormulasListDAO;
+import es.rczone.reckoner.dao.RFormulaListDAO;
 import es.rczone.reckoner.model.Formula;
 
 
@@ -85,7 +85,7 @@ public class FormulasPickerController extends Controller{
 			@Override
 			public void run() {
 				//Make the changes persistence 
-				FormulasListDAO dao = new FormulasListDAO();
+				RFormulaListDAO dao = new RFormulaListDAO();
 				
 				List<Formula> formulas = dao.getRemainingFormulas(name);
 				synchronized (modelList) {

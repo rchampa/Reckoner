@@ -36,13 +36,19 @@
     <string name="buttton_add_formula">Add formula</string>
     <string name="buttton_add_variables">Add variables</string>
     <string name="buttton_add_variable">Add</string>
+    <string name="buttton_finish">Finish</string>
     
     <!-- FormulasListActivity -->
     <string name="hint_formulasList_name">Name of the list</string>
-    <string name="buttton_add_formulasList">Edit list</string>
+    <string name="buttton_add_formulasList">Create list</string>
+    <string name="buttton_edit_formulasList">Edit list</string>
+    <string name="buttton_delete_formulasList">Delete list</string>
+    <string name="spinner_prompt_formulasList">Pick a list</string>
+    
     
     <!-- FormulasPickerActivity -->
     <string name="buttton_save_formulasList">Save list</string>
+    
     
     
 </resources>

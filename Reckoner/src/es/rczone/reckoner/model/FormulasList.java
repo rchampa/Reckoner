@@ -15,7 +15,6 @@ public class FormulasList {
 		
 	}
 	
-	
 	public void addFormula(Formula f){
 		list.add(f);
 	}
@@ -26,6 +25,10 @@ public class FormulasList {
 	
 	public int size(){
 		return list.size();
+	}
+	
+	public ArrayList<Formula> getCopyOfList(){
+		return new ArrayList<Formula>(this.list);
 	}
 
 }

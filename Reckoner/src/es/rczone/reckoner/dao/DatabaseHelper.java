@@ -26,10 +26,10 @@ final class DatabaseHelper extends SQLiteOpenHelper {
 								FormulaDAO.VARIABLES + " varchar(20) not null)";
 		
 		
-		final String formulasList = "CREATE TABLE " + FormulasListDAO.TABLE + "(" + 
-								FormulasListDAO.NAME + " varchar(25), " +
-								FormulasListDAO.FORMULA_NAME + " varchar(25), " +
-								"PRIMARY KEY ("+FormulasListDAO.NAME+", "+FormulasListDAO.FORMULA_NAME+") )";
+		final String formulasList = "CREATE TABLE " + RFormulaListDAO.TABLE + "(" + 
+								RFormulaListDAO.NAME + " varchar(25), " +
+								RFormulaListDAO.FORMULA_NAME + " varchar(25), " +
+								"PRIMARY KEY ("+RFormulaListDAO.NAME+", "+RFormulaListDAO.FORMULA_NAME+") )";
 		
 		
 		database.execSQL(formulas);

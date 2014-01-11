@@ -3,15 +3,37 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/card_background_white"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp" >
 
-    <Button android:id="@+id/buttton_add_formulas_list"
+
+    <Spinner
+	    android:id="@+id/spinner"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:drawSelectorOnTop="true"
+	    android:prompt="@string/spinner_prompt_formulasList"
+    />
+    
+    <LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:gravity="center"
+	    android:padding="16dp" >
+    
+     <Button android:id="@+id/buttton_edit_formulas_list"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/buttton_add_formulasList"
-    />
+        android:text="@string/buttton_edit_formulasList"
+     />
+     
+     <Button android:id="@+id/buttton_delete_formulas_list"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/buttton_delete_formulasList"
+     />
 
-
+    </LinearLayout>
 </LinearLayout>
