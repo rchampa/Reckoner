@@ -5,6 +5,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import com.haarman.listviewanimations.ArrayAdapter;
+import com.haarman.listviewanimations.swinginadapters.AnimationAdapter;
+import com.haarman.listviewanimations.swinginadapters.prepared.ScaleInAnimationAdapter;
 
 public class BaseActivity extends ActionBarActivity {
 
@@ -27,5 +32,13 @@ public class BaseActivity extends ActionBarActivity {
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+	
+	protected void setAnimAdapter(ListView listview, ArrayAdapter<?> adapter){
+		
+		AnimationAdapter animAdapter = new ScaleInAnimationAdapter(adapter);
+		animAdapter.setAbsListView(listview);
+		animAdapter.setInitialDelayMillis(500);
+		listview.setAdapter(animAdapter);
 	}
 }

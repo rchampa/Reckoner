@@ -17,8 +17,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.haarman.listviewanimations.ArrayAdapter;
-import com.haarman.listviewanimations.swinginadapters.AnimationAdapter;
-import com.haarman.listviewanimations.swinginadapters.prepared.ScaleInAnimationAdapter;
 
 import es.rczone.reckoner.R;
 import es.rczone.reckoner.controllers.AddFormulasController;
@@ -43,10 +41,7 @@ public class AddFormulaActivity extends BaseActivity {
 
 		mGoogleCardsAdapter = new AddFormulaAdapter(this);
 
-		AnimationAdapter animAdapter = new ScaleInAnimationAdapter(mGoogleCardsAdapter);
-		animAdapter.setAbsListView(listView);
-		animAdapter.setInitialDelayMillis(500);
-		listView.setAdapter(animAdapter);
+		this.setAnimAdapter(listView, mGoogleCardsAdapter);
 
 		mGoogleCardsAdapter.addAll(getItems());
 		
@@ -138,7 +133,7 @@ public class AddFormulaActivity extends BaseActivity {
 		private View prepareCardNameFormula(View convertView, ViewGroup parent){
 			
 			if (formulaNameCard == null) {
-				formulaNameCard = LayoutInflater.from(mContext).inflate(R.layout.googlecard_formula_name, parent, false);
+				formulaNameCard = LayoutInflater.from(mContext).inflate(R.layout.googlecard_add_formula_name, parent, false);
 				formulaName = (EditText) formulaNameCard.findViewById(R.id.activity_googlecards_card_et_formula_name);
 				
 			} 

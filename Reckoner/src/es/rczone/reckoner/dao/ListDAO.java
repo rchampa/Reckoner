@@ -53,7 +53,7 @@ public class ListDAO {
 				
 			
 		} catch (SQLiteConstraintException e) {
-	        Log.d("FormulaDAO", "failure to insert formula", e);
+	        Log.d("FormulaDAO", "failure to insert list", e);
 	    	db.close();
 			return false;
 	    }
