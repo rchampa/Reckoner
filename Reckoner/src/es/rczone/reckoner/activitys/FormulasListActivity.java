@@ -25,7 +25,6 @@ import android.widget.Toast;
 
 import com.haarman.listviewanimations.ArrayAdapter;
 import com.haarman.listviewanimations.itemmanipulation.ExpandableListItemAdapter;
-import com.haarman.listviewanimations.swinginadapters.prepared.ScaleInAnimationAdapter;
 
 import es.rczone.reckoner.R;
 import es.rczone.reckoner.activitys.customlayouts.FormulaLayout;
@@ -112,6 +111,7 @@ public class FormulasListActivity extends BaseActivity implements OnNavigationLi
 			};
 		}
 
+		//FIXME optmize this please
 		@Override
 		public View getTitleView(int position, View convertView, ViewGroup parent) {
 			

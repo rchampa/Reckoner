@@ -34,6 +34,11 @@ public class MainActivity extends Activity {
             	intent = new Intent(this,AddListActivity.class);
             	startActivity(intent);
             	break;
+            	
+            case R.id.button4:
+            	intent = new Intent(this, DeleteFormulaActivity.class);
+            	startActivity(intent);
+            	break;
 		}
 	}
 

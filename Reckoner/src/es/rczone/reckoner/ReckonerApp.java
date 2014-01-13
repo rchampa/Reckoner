@@ -14,7 +14,7 @@ public class ReckonerApp extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		Log.i(TAG, "MemorizeApp.onCreate was called");
+		Log.i(TAG, "Reckoner.onCreate was called");
 		INSTANCE = this;
 	}
 	
