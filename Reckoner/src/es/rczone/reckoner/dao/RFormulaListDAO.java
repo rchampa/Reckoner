@@ -26,12 +26,15 @@ public class RFormulaListDAO {
 		FormulasList valueObject = new FormulasList(name);
 		Formula f;
 		String formulaName;
-		while (cursor.moveToFirst()) {
-			name = cursor.getString(cursor.getColumnIndex(NAME));
-			formulaName = cursor.getString(cursor.getColumnIndex(FORMULA_NAME));
+		if(cursor.moveToFirst()){
 			
-			f = new FormulaDAO().get(formulaName);
-			valueObject.addFormula(f);			
+			do{
+				name = cursor.getString(cursor.getColumnIndex(NAME));
+				formulaName = cursor.getString(cursor.getColumnIndex(FORMULA_NAME));
+				
+				f = new FormulaDAO().get(formulaName);
+				valueObject.addFormula(f);		
+			}while(cursor.moveToNext());
 		}
 		
 		cursor.close();
@@ -55,11 +58,14 @@ public class RFormulaListDAO {
 		List<Formula> list = new ArrayList<Formula>();
 		Formula f;
 		String formulaName;
-		while (cursor.moveToFirst()) {
-			formulaName = cursor.getString(cursor.getColumnIndex("f_name"));
-			
-			f = new FormulaDAO().get(formulaName);
-			list.add(f);			
+		if(cursor.moveToFirst()){
+					
+			do{
+				formulaName = cursor.getString(cursor.getColumnIndex("f_name"));
+				
+				f = new FormulaDAO().get(formulaName);
+				list.add(f);
+			}while(cursor.moveToNext());
 		}
 		
 		cursor.close();
@@ -81,9 +87,12 @@ public class RFormulaListDAO {
 		
 		List<String> list = new ArrayList<String>();
 		String formulaListName;
-		while (cursor.moveToFirst()) {
-			formulaListName = cursor.getString(cursor.getColumnIndex(NAME));
-			list.add(formulaListName);			
+		if(cursor.moveToFirst()){
+			
+			do{
+				formulaListName = cursor.getString(cursor.getColumnIndex(NAME));
+				list.add(formulaListName);			
+			}while(cursor.moveToNext());
 		}
 		
 		cursor.close();

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -107,6 +108,64 @@ public class FormulaDAO {
 			return false;
 	    }
 		
+	}
+	
+	
+	//Create
+	public boolean insertRel(Formula formula, String nameList) {
+		
+		SQLiteDatabase db = new DatabaseHelper().getWritableDatabase();
+		boolean query=false;
+		try {
+		    db.beginTransaction();
+		    
+		    
+		    //Insert new formula
+			ContentValues values = new ContentValues();
+			values.put(NAME, formula.getName());
+			values.put(FORMULA, formula.getFunctionFormula());
+			
+			String vars="";
+			for(String var : formula.getVariables()){
+				vars+= var+"-";
+			}
+			
+			values.put(VARIABLES, vars);
+			
+			long num=-1;
+			
+		
+			num = db.insertOrThrow(TABLE, null, values);
+			if(num!=-1)
+				query =  true;	
+			
+			
+			
+			//Insert relationship	
+			values.clear();
+			values.put(RFormulaListDAO.NAME, nameList);
+			values.put(RFormulaListDAO.FORMULA_NAME, formula.getName());
+			
+			num=-1;
+			num = db.insertOrThrow(RFormulaListDAO.TABLE, null, values);
+			
+			if(num!=-1)
+				query =  query && true;
+			
+			if(query)			
+				db.setTransactionSuccessful();
+			
+		} catch (SQLiteConstraintException e) {
+	        Log.d("FormulaDAO", "failure to insert formula", e);
+	        query = false;
+		    
+		} catch(SQLException e) {
+			query = false;
+		} finally {
+		   db.endTransaction();
+		}
+	
+		return query;
 	}
 	
 	//Update

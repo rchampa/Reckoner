@@ -54,9 +54,13 @@ public class AddListController extends Controller{
 		final String name = args.get(AddListActivity.NAME_LIST);
 		
 		ListDAO dao = new ListDAO();
-		boolean response = dao.insert(name);
+		boolean query = dao.insert(name);
 		
-		return response;
+		if(!query) {
+			errorMessage = "There is a formula with the same name, please use another name.";
+		}
+		
+		return query;
 	}
 
 }

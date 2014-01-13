@@ -25,22 +25,26 @@ import android.widget.Toast;
 
 import com.haarman.listviewanimations.ArrayAdapter;
 import com.haarman.listviewanimations.itemmanipulation.ExpandableListItemAdapter;
-import com.haarman.listviewanimations.itemmanipulation.contextualundo.ContextualUndoAdapter.DeleteItemCallback;
 import com.haarman.listviewanimations.swinginadapters.prepared.ScaleInAnimationAdapter;
 
 import es.rczone.reckoner.R;
 import es.rczone.reckoner.activitys.customlayouts.FormulaLayout;
 import es.rczone.reckoner.dao.FormulaDAO;
+import es.rczone.reckoner.dao.ListDAO;
+import es.rczone.reckoner.dao.RFormulaListDAO;
 import es.rczone.reckoner.model.Formula;
+import es.rczone.reckoner.model.FormulasList;
 import es.rczone.reckoner.tools.Tools;
 
-public class FormulasListActivity extends BaseActivity implements DeleteItemCallback, OnNavigationListener{
+public class FormulasListActivity extends BaseActivity implements OnNavigationListener{
 
 	private MyExpandableListItemAdapter mExpandableListItemAdapter;
 	private boolean mLimited;
 	private static SparseArray<FormulaLayout> bufferRows;
 	
 	private ListView mListView;
+	
+	ArrayList<String> lists;
 	
 	
 
@@ -55,19 +59,18 @@ public class FormulasListActivity extends BaseActivity implements DeleteItemCall
 		mListView = (ListView) findViewById(R.id.activity_mylist_listview);
 		mListView.setDivider(null);
 
-		mExpandableListItemAdapter = new MyExpandableListItemAdapter(this, getItems_F());
+		/*mExpandableListItemAdapter = new MyExpandableListItemAdapter(this, getItems_F());
 		ScaleInAnimationAdapter alphaInAnimationAdapter = new ScaleInAnimationAdapter(mExpandableListItemAdapter);
 		alphaInAnimationAdapter.setAbsListView(mListView);
 		alphaInAnimationAdapter.setInitialDelayMillis(500);
-		mListView.setAdapter(alphaInAnimationAdapter);
+		mListView.setAdapter(alphaInAnimationAdapter);*/
 	
+		lists = new ListDAO().getAllLists();
 
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		getSupportActionBar().setListNavigationCallbacks(new FormulasListAdapter(), this);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		
-		
-
 		Toast.makeText(this, R.string.explainexpand, Toast.LENGTH_SHORT).show();
 	}
 	
@@ -75,12 +78,6 @@ public class FormulasListActivity extends BaseActivity implements DeleteItemCall
 		return new FormulaDAO().getAllFormulas();
 	}
 	
-	
-	@Override
-	public void deleteItem(int position) {
-		mExpandableListItemAdapter.remove(position);
-		mExpandableListItemAdapter.notifyDataSetChanged();
-	}
 
 	private static class MyExpandableListItemAdapter extends ExpandableListItemAdapter<Formula> {
 
@@ -170,6 +167,17 @@ public class FormulasListActivity extends BaseActivity implements DeleteItemCall
 			return mMemoryCache.get(key);
 		}
 
+		
+		public void setList(List<Formula> items){
+			this.items = items;
+		}
+		
+		@Override
+		public void clear(){
+			mMemoryCache.evictAll();
+			bufferRows.clear();
+			super.clear();
+		}
 	}
 	
 	@Override
@@ -193,7 +201,8 @@ public class FormulasListActivity extends BaseActivity implements DeleteItemCall
 	private class FormulasListAdapter extends ArrayAdapter<String> {
 
 		public FormulasListAdapter() {
-			addAll("Alpha", "Left", "Right", "Bottom", "Bottom right", "Scale");
+			
+			addAll(lists);
 		}
 
 		@Override
@@ -211,8 +220,34 @@ public class FormulasListActivity extends BaseActivity implements DeleteItemCall
 
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		String name = this.lists.get(itemPosition);
+		loadFormulas(name);
+		return true;
 	}
+	
+	private synchronized void loadFormulas(String nameList){
+		
+		FormulasList list = new RFormulaListDAO().get(nameList);
+		
+		//XXX fix this 
+		if(mExpandableListItemAdapter!=null){
+			mExpandableListItemAdapter.clear();
+			mExpandableListItemAdapter.addAll(list.getCopyOfList());
+			mExpandableListItemAdapter.setList(list.getCopyOfList());
+			mExpandableListItemAdapter.notifyDataSetChanged();
+			
+		}
+		else{
+			mExpandableListItemAdapter = new MyExpandableListItemAdapter(this, list.getCopyOfList());
+			/*ScaleInAnimationAdapter anim = new ScaleInAnimationAdapter(mExpandableListItemAdapter);
+			anim.setAbsListView(mListView);
+			anim.setInitialDelayMillis(500);*/
+			mListView.setAdapter(mExpandableListItemAdapter);
+		}
+		
+	}
+	
+	
 
 }

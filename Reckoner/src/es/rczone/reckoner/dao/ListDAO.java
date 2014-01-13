@@ -13,8 +13,6 @@ public class ListDAO {
 	static final String TABLE = "list";
 	static final String NAME = "name";
 	
-	
-	
 	public ArrayList<String> getAllLists() {
 		
 		SQLiteDatabase db = new DatabaseHelper().getReadableDatabase();
@@ -27,7 +25,8 @@ public class ListDAO {
 			do{
 				name = cursor.getString(cursor.getColumnIndex(NAME));
 				lists.add(name);
-			}while(cursor.moveToNext());
+			}
+			while(cursor.moveToNext());
 		}
 		
 		cursor.close();

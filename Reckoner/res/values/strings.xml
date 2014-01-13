@@ -41,7 +41,7 @@
     
     <!-- AddListActivity -->
     <string name="et_hint_name_list">Enter a name of new list</string>
-    <string name="buttton_add_list">Add list</string>
+    <string name="buttton_add_list">Add new list</string>
     <string name="buttton_addlist_finish">Finish</string>
     
     <!-- FormulasListActivity -->

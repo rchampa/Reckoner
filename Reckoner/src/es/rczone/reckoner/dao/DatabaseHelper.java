@@ -11,7 +11,7 @@ final class DatabaseHelper extends SQLiteOpenHelper {
 	@SuppressWarnings("unused")
 	private static final String TAG = DatabaseHelper.class.getSimpleName();
 	private static final String DATABASE_NAME = "Reckoner";
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 	
 	public DatabaseHelper() {
 		super(ReckonerApp.getContext(), DATABASE_NAME, null, DATABASE_VERSION);
@@ -25,6 +25,8 @@ final class DatabaseHelper extends SQLiteOpenHelper {
 								FormulaDAO.FORMULA + " varchar(100) not null, " +
 								FormulaDAO.VARIABLES + " varchar(20) not null)";
 		
+		final String lists = "CREATE TABLE " + ListDAO.TABLE + "(" + 
+				ListDAO.NAME + " varchar(25) primary key )";
 		
 		final String formulasList = "CREATE TABLE " + RFormulaListDAO.TABLE + "(" + 
 								RFormulaListDAO.NAME + " varchar(25), " +
@@ -33,6 +35,7 @@ final class DatabaseHelper extends SQLiteOpenHelper {
 		
 		
 		database.execSQL(formulas);
+		database.execSQL(lists);
 		database.execSQL(formulasList);
 		
 	}

@@ -43,4 +43,7 @@ abstract class Controller {
 	public String getErrorMessage(){
 		return this.errorMessage;
 	}
+	public void setErrorMessage(String msg){
+		this.errorMessage = msg;
+	}
 }

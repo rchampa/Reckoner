@@ -3,6 +3,7 @@ package es.rczone.reckoner.activitys;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,7 +16,6 @@ import android.widget.Toast;
 import com.haarman.listviewanimations.ArrayAdapter;
 
 import es.rczone.reckoner.R;
-import es.rczone.reckoner.controllers.AddFormulasController;
 import es.rczone.reckoner.controllers.AddListController;
 
 public class AddListActivity extends BaseActivity {
@@ -58,7 +58,6 @@ public class AddListActivity extends BaseActivity {
 		
 		private View buttonsCard;
 		private Button addButton;
-		private Button okButton;
 		
 		public AddListAdapter() {}
 
@@ -99,7 +98,10 @@ public class AddListActivity extends BaseActivity {
 							return;
 						}
 						
-						boolean isOk = AddListActivity.this.controller.handleMessage(AddListController.MESSAGE_ADD_LIST, nameList);
+						SparseArray<String> args = new SparseArray<String>(2);
+						args.put(NAME_LIST, nameList);
+						
+						boolean isOk = AddListActivity.this.controller.handleMessage(AddListController.MESSAGE_ADD_LIST, args);
 						if(isOk){
 							Toast.makeText(AddListActivity.this, "Your list was added succesfully.", Toast.LENGTH_SHORT).show();
 							listName.setText("");
@@ -112,15 +114,6 @@ public class AddListActivity extends BaseActivity {
 						
 					}
 				});	
-				okButton = (Button) buttonsCard.findViewById(R.id.buttton_addlist_finish);
-				okButton.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						
-						
-					}
-				});
 			} 
 			
 			return buttonsCard;

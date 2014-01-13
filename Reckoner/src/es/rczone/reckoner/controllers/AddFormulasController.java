@@ -10,6 +10,7 @@ import es.rczone.dariuslib.me.Parser;
 import es.rczone.dariuslib.me.SyntaxException;
 import es.rczone.reckoner.activitys.AddFormulaActivity;
 import es.rczone.reckoner.dao.FormulaDAO;
+import es.rczone.reckoner.dao.RFormulaListDAO;
 import es.rczone.reckoner.model.Formula;
 import es.rczone.reckoner.tools.Tools;
 
@@ -60,57 +61,75 @@ public class AddFormulasController extends Controller{
 		
 		final String formula = args.get(AddFormulaActivity.FORMULA_FORMULA);
 		final String name = args.get(AddFormulaActivity.FORMULA_NAME).trim();
+		final String listName = args.get(AddFormulaActivity.FORMULA_LIST_NAME).trim();
 		
-		try {
-			Parser.parse(formula);
-		} catch (SyntaxException e) {
-			Log.e("Parser",e.explain());
-			errorMessage = e.explain();
-			return false;
-		}
 		
-		String formulaTemp=formula;
 		
-		for(String s : Parser.procs1){
-			if(formulaTemp.contains(s)){
-				formulaTemp = formulaTemp.replace(s, "");
+		boolean query = false;
+		if(new FormulaDAO().get(name)==null){
+			
+			try {
+				Parser.parse(formula);
+			} catch (SyntaxException e) {
+				Log.e("Parser",e.explain());
+				errorMessage = e.explain();
+				return false;
 			}
-		}
-		
-		for(String s : Parser.procs2){
-			if(formulaTemp.contains(s)){
-				formulaTemp = formulaTemp.replace(s, "");
+			
+			String formulaTemp=formula;
+			
+			for(String s : Parser.procs1){
+				if(formulaTemp.contains(s)){
+					formulaTemp = formulaTemp.replace(s, "");
+				}
 			}
-		}
-		
-		
-		final ArrayList<String> varList = new ArrayList<String>();
-		
-		char l;
-		for(int i=0; i<formulaTemp.length(); i++){
-			l = formulaTemp.charAt(i);
-			if(Character.isLetter(l))
-				varList.add(""+l);
+			
+			for(String s : Parser.procs2){
+				if(formulaTemp.contains(s)){
+					formulaTemp = formulaTemp.replace(s, "");
+				}
+			}
+			
+			
+			final ArrayList<String> varList = new ArrayList<String>();
+			
+			char l;
+			for(int i=0; i<formulaTemp.length(); i++){
+				l = formulaTemp.charAt(i);
+				if(Character.isLetter(l))
+					varList.add(""+l);
+				
+			}
+			
+			if(varList.size()==0)
+				return false;
+			
+			/*
+			Formula f = new Formula(name, formula, varList);
+			
+			FormulaDAO dao = new FormulaDAO();
+			boolean query = dao.insert(f);
+			if(!query) {
+				errorMessage = "There is a formula with the same name, please use another name.";
+				return false;
+			}
+			*/
+			Formula f = new Formula(name, formula, varList);
+			FormulaDAO dao = new FormulaDAO();
+			query = dao.insertRel(f, listName);
+			
+			workerHandler.post(new Runnable() {
+				@Override
+				public void run() {
+					Tools.getImage(Formula.PATH_FOLDER, name+".gif", "http://latex.codecogs.com/gif.latex?%5Chuge%20"+formula);    			
+				}
+			});
 			
 		}
-		
-		if(varList.size()==0)
-			return false;
-		
-		Formula f = new Formula(name, formula, varList);
-		FormulaDAO dao = new FormulaDAO();
-		boolean query = dao.insert(f);
-		if(!query) {
-			errorMessage = "There is a formula with the same name, please use another name.";
-			return false;
+		else{
+			RFormulaListDAO dao = new RFormulaListDAO();
+			query = dao.insert(listName, name);
 		}
-		
-		workerHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				Tools.getImage(Formula.PATH_FOLDER, name+".gif", "http://latex.codecogs.com/gif.latex?%5Chuge%20"+formula);    			
-			}
-		});
 		
 		return query;
 	}

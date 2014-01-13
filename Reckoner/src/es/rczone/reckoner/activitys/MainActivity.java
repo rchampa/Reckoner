@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
             	break;
             	
             case R.id.button3:
-            	intent = new Intent(this,AddFormulasListActivity.class);
+            	intent = new Intent(this,AddListActivity.class);
             	startActivity(intent);
             	break;
 		}

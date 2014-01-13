@@ -26,6 +26,7 @@ public class AddFormulaActivity extends BaseActivity {
 	
 	public static final int FORMULA_NAME = 0;
 	public static final int FORMULA_FORMULA = 1;
+	public static final int FORMULA_LIST_NAME = 2;
 	
 	private AddFormulaAdapter mGoogleCardsAdapter;
 	private AddFormulasController controller;
@@ -52,6 +53,7 @@ public class AddFormulaActivity extends BaseActivity {
 		ArrayList<String> items = new ArrayList<String>();
 		items.add("Name");
 		items.add("Formula");
+		items.add("List");
 		items.add("Buttons");
 		
 		return items;
@@ -72,7 +74,6 @@ public class AddFormulaActivity extends BaseActivity {
 		
 		private View buttonsCard;
 		private Button addButton;
-		private Button okButton;
 		
 
 		public AddFormulaAdapter(Context context) {
@@ -80,41 +81,6 @@ public class AddFormulaActivity extends BaseActivity {
 		}
 
 		
-		private final OnClickListener addFormulaOnClick = new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				
-				String name = formulaName.getText().toString().trim();
-				String formula = etFormula.getText().toString().trim();
-				
-				if("".equals(name)){
-					Toast.makeText(mContext, "Please fill the name", Toast.LENGTH_SHORT).show();
-					return;
-				}
-				
-				if("".equals(formula)){
-					Toast.makeText(mContext, "Please fill the formula", Toast.LENGTH_SHORT).show();
-					return;
-				}
-					
-				
-				SparseArray<String> args = new SparseArray<String>(2);
-				args.put(FORMULA_NAME, name);
-				args.put(FORMULA_FORMULA, formula);
-				boolean isOk = AddFormulaActivity.this.controller.handleMessage(AddFormulasController.MESSAGE_ADD_FORMULA, args);
-				if(isOk){
-					Toast.makeText(mContext, "Your formula was added succesfully.", Toast.LENGTH_SHORT).show();
-					formulaName.setText("");
-					etFormula.setText("");
-				}
-				else{
-					String msg = AddFormulaActivity.this.controller.getErrorMessage();
-					Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
-				}
-			}
-			
-		};
 		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
@@ -161,6 +127,7 @@ public class AddFormulaActivity extends BaseActivity {
 				spinner = (Spinner) formulaSpinnerCard.findViewById(R.id.spinner_add_formula);
 				List<String> list = new ListDAO().getAllLists();
 				android.widget.ArrayAdapter<String> adapter = new android.widget.ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_dropdown_item, list);
+				spinner.setPrompt("Select a list");
 				spinner.setAdapter(adapter);
 			} 
 			
@@ -175,9 +142,46 @@ public class AddFormulaActivity extends BaseActivity {
 			if (buttonsCard == null) {
 				buttonsCard = LayoutInflater.from(mContext).inflate(R.layout.googlecard_add_formula_buttons, parent, false);
 				addButton = (Button) buttonsCard.findViewById(R.id.buttton_add_formula);
-				addButton.setOnClickListener(addFormulaOnClick);	
-				okButton = (Button) buttonsCard.findViewById(R.id.buttton_add_formula);
-				okButton.setOnClickListener(addFormulaOnClick);
+				addButton.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						String name = formulaName.getText().toString().trim();
+						String formula = etFormula.getText().toString().trim();
+						
+						if("".equals(name)){
+							Toast.makeText(mContext, "Please fill the name", Toast.LENGTH_SHORT).show();
+							return;
+						}
+						
+						if("".equals(formula)){
+							Toast.makeText(mContext, "Please fill the formula", Toast.LENGTH_SHORT).show();
+							return;
+						}
+							
+						String listName = (String) spinner.getSelectedItem();
+						if(listName==null){
+							Toast.makeText(mContext, "Please pick a list", Toast.LENGTH_SHORT).show();
+							return;
+						}
+						
+						SparseArray<String> args = new SparseArray<String>(2);
+						args.put(FORMULA_NAME, name);
+						args.put(FORMULA_FORMULA, formula);
+						args.put(FORMULA_LIST_NAME, listName);
+						
+						boolean isOk = AddFormulaActivity.this.controller.handleMessage(AddFormulasController.MESSAGE_ADD_FORMULA, args);
+						if(isOk){
+							Toast.makeText(mContext, "Your formula was added succesfully.", Toast.LENGTH_SHORT).show();
+							formulaName.setText("");
+							etFormula.setText("");
+						}
+						else{
+							String msg = AddFormulaActivity.this.controller.getErrorMessage();
+							Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+						}
+					}
+				});	
 			} 
 			
 			return buttonsCard;
