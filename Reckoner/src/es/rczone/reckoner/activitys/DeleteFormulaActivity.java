@@ -33,6 +33,7 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 	private ListView mListView;
 	private ArrayList<String> lists;
 	private MyListAdapter mAdapter;
+	private String selectedList = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,9 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 	@Override
 	public void deleteItem(int position) {
 		
-		Formula f = mListView.get
+		Formula f = mAdapter.getItem(position); 
+		
+		new RFormulaListDAO().delete(selectedList, f.getName());
 		
 		mAdapter.remove(position);
 		mAdapter.notifyDataSetChanged();
@@ -135,8 +138,8 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 		
-		String name = this.lists.get(itemPosition);
-		loadFormulas(name);
+		selectedList = this.lists.get(itemPosition);
+		loadFormulas(selectedList);
 		return true;
 	}
 	

@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    
+    <!-- Menu -->
+    <string name="menu_animations">Animations</string>
+    <string name="menu_parser">Parser</string>
+    
+    <string name="thanks_animations">Special thanks to Niek Haarman and his library http://nhaarman.github.io/ListViewAnimations/</string>
+    <string name="thanks_parser">Special thanks to Darius Bacon and his library https://github.com/darius/expr</string>
+    
+    <!-- haarmananimations -->
+    
     <string name="app_name">Reckoner</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
@@ -54,7 +64,6 @@
     
     <!-- FormulasPickerActivity -->
     <string name="buttton_save_formulasList">Save list</string>
-    
     
     
 </resources>

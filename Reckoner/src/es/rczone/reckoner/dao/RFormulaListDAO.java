@@ -46,7 +46,7 @@ public class RFormulaListDAO {
 	}
 	
 	//Read
-	public List<Formula> getRemainingFormulas(String name) {
+	public FormulasList getRemainingFormulas(String name) {
 		
 		String QUERY = "SELECT DISTINCT f.name as f_name FROM "+FormulaDAO.TABLE+" f where f.name not in (select formula_name from "+TABLE+" l where l.name=?)";
 				
@@ -55,7 +55,7 @@ public class RFormulaListDAO {
 		Cursor cursor = db.rawQuery(QUERY, new String[]{name});
 		
 		
-		List<Formula> list = new ArrayList<Formula>();
+		FormulasList valueObject = new FormulasList(name);
 		Formula f;
 		String formulaName;
 		if(cursor.moveToFirst()){
@@ -64,16 +64,15 @@ public class RFormulaListDAO {
 				formulaName = cursor.getString(cursor.getColumnIndex("f_name"));
 				
 				f = new FormulaDAO().get(formulaName);
-				list.add(f);
+				valueObject.addFormula(f);
 			}while(cursor.moveToNext());
 		}
 		
 		cursor.close();
 		db.close();
+						
 		
-		if(list.size()==0) return null;
-		
-		return list;
+		return valueObject;
 	}
 	
 	public List<String> getNamesOfAllFormulasList() {
@@ -171,5 +170,12 @@ public class RFormulaListDAO {
 		
 	}
 	
+	
+	//Remove
+	public void delete(String listName, String formulaName) {
+		SQLiteDatabase db = new DatabaseHelper().getWritableDatabase();
+		db.delete(TABLE, NAME+"=? and "+FORMULA_NAME+"=?", new String[]{listName,formulaName});
+		db.close();
+	}
 	
 }
