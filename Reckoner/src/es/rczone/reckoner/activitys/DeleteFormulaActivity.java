@@ -75,6 +75,9 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 
 	@Override
 	public void deleteItem(int position) {
+		
+		Formula f = mListView.get
+		
 		mAdapter.remove(position);
 		mAdapter.notifyDataSetChanged();
 	}
