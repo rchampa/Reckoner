@@ -138,7 +138,7 @@ public class AddFormulasListActivity extends BaseActivity implements Handler.Cal
 		private View prepareCardNameFormula(View convertView, ViewGroup parent){
 			
 			if (formulaNameCard == null) {
-				formulaNameCard = LayoutInflater.from(mContext).inflate(R.layout.googlecard_formulas_list_name, parent, false);
+				formulaNameCard = LayoutInflater.from(mContext).inflate(R.layout.layout_formulas_list_name, parent, false);
 				formulaName = (EditText) formulaNameCard.findViewById(R.id.activity_googlecards_card_et_formulas_list_name);
 			} 
 			
@@ -149,7 +149,7 @@ public class AddFormulasListActivity extends BaseActivity implements Handler.Cal
 		private View prepareCardFormulaButtons(View convertView, ViewGroup parent){
 
 			if (buttonsCard == null) {
-				buttonsCard = LayoutInflater.from(mContext).inflate(R.layout.googlecard_formulas_list_buttons, parent, false);
+				buttonsCard = LayoutInflater.from(mContext).inflate(R.layout.layout_formulas_list_buttons, parent, false);
 				addButton = (Button) buttonsCard.findViewById(R.id.buttton_add_formulas_list);
 				addButton.setOnClickListener(addFormulaOnClick);			
 			} 

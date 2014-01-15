@@ -20,7 +20,7 @@ public class BaseActivity extends ActionBarActivity {
 			getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 		}
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
 	}
 
 	@Override

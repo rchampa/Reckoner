@@ -3,16 +3,6 @@ package es.rczone.reckoner.activitys;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.haarman.listviewanimations.ArrayAdapter;
-import com.haarman.listviewanimations.itemmanipulation.AnimateDismissAdapter;
-import com.haarman.listviewanimations.itemmanipulation.OnDismissCallback;
-
-import es.rczone.reckoner.R;
-import es.rczone.reckoner.dao.ListDAO;
-import es.rczone.reckoner.dao.RFormulaListDAO;
-import es.rczone.reckoner.model.Formula;
-import es.rczone.reckoner.model.FormulasList;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -29,6 +19,16 @@ import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.haarman.listviewanimations.ArrayAdapter;
+import com.haarman.listviewanimations.itemmanipulation.AnimateDismissAdapter;
+import com.haarman.listviewanimations.itemmanipulation.OnDismissCallback;
+
+import es.rczone.reckoner.R;
+import es.rczone.reckoner.dao.ListDAO;
+import es.rczone.reckoner.dao.RFormulaListDAO;
+import es.rczone.reckoner.model.Formula;
+import es.rczone.reckoner.model.FormulasList;
+
 public class AddFormultaToList extends BaseActivity implements OnNavigationListener{
 
 	private List<Integer> mSelectedPositions;
@@ -36,6 +36,7 @@ public class AddFormultaToList extends BaseActivity implements OnNavigationListe
 	private ListView mListView;
 	private ArrayList<String> lists;
 	private String selectedList = "";
+	private ArrayList<String> formulas;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +45,9 @@ public class AddFormultaToList extends BaseActivity implements OnNavigationListe
 
 		lists = new ListDAO().getAllLists();
 		mSelectedPositions = new ArrayList<Integer>();
+		formulas = new ArrayList<String>();
 
 		mListView = (ListView) findViewById(R.id.activity_animateremoval_listview);
-		mAdapter = new MyListAdapter(MyListActivity.getItems());
 		
 		final AnimateDismissAdapter<String> animateDismissAdapter = new AnimateDismissAdapter<String>(mAdapter, new MyOnDismissCallback());
 		animateDismissAdapter.setAbsListView(mListView);
@@ -57,8 +58,9 @@ public class AddFormultaToList extends BaseActivity implements OnNavigationListe
 
 			@Override
 			public void onClick(View v) {
-				animateDismissAdapter.animateDismiss(mSelectedPositions);
+				animateDismissAdapter.animateDismiss(mSelectedPositions);				
 				mSelectedPositions.clear();
+				formulas.clear();
 			}
 		});
 
@@ -70,8 +72,11 @@ public class AddFormultaToList extends BaseActivity implements OnNavigationListe
 				tv.toggle();
 				if (tv.isChecked()) {
 					mSelectedPositions.add(position);
+					//Log.d("Adapter",""+position);
+					formulas.add(mAdapter.getItem(position).getFunctionFormula());
 				} else {
 					mSelectedPositions.remove((Integer) position);
+					formulas.remove(mAdapter.getItem(position).getFunctionFormula());
 				}
 			}
 		});
@@ -104,9 +109,6 @@ public class AddFormultaToList extends BaseActivity implements OnNavigationListe
 		}
 		else{
 			mAdapter = new MyListAdapter(this, list.getCopyOfList());
-			/*ScaleInAnimationAdapter anim = new ScaleInAnimationAdapter(mExpandableListItemAdapter);
-			anim.setAbsListView(mListView);
-			anim.setInitialDelayMillis(500);*/
 			mListView.setAdapter(mAdapter);
 		}
 		

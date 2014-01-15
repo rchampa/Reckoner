@@ -99,7 +99,7 @@ public class AddFormulaActivity extends BaseActivity {
 		private View prepareCardNameFormula(View convertView, ViewGroup parent){
 			
 			if (formulaNameCard == null) {
-				formulaNameCard = LayoutInflater.from(mContext).inflate(R.layout.googlecard_add_formula_name, parent, false);
+				formulaNameCard = LayoutInflater.from(mContext).inflate(R.layout.layout_add_formula_name, parent, false);
 				formulaName = (EditText) formulaNameCard.findViewById(R.id.activity_googlecards_card_et_formula_name);
 				
 			} 
@@ -112,7 +112,7 @@ public class AddFormulaActivity extends BaseActivity {
 		private View prepareCardFormula(View convertView, ViewGroup parent){
 			
 			if (formulaCard == null) {
-				formulaCard = LayoutInflater.from(mContext).inflate(R.layout.googlecard_add_formula, parent, false);
+				formulaCard = LayoutInflater.from(mContext).inflate(R.layout.layout_add_formula, parent, false);
 				etFormula = (EditText) formulaCard.findViewById(R.id.activity_googlecards_card_et_formula);
 			} 
 			
@@ -123,7 +123,7 @@ public class AddFormulaActivity extends BaseActivity {
 		private View prepareCardSpinnerFormulaList(View convertView, ViewGroup parent){
 			
 			if (formulaSpinnerCard == null) {
-				formulaSpinnerCard = LayoutInflater.from(mContext).inflate(R.layout.googlecard_add_formula_spinner_formulas_list, parent, false);
+				formulaSpinnerCard = LayoutInflater.from(mContext).inflate(R.layout.layout_add_formula_spinner_formulas_list, parent, false);
 				spinner = (Spinner) formulaSpinnerCard.findViewById(R.id.spinner_add_formula);
 				List<String> list = new ListDAO().getAllLists();
 				android.widget.ArrayAdapter<String> adapter = new android.widget.ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_dropdown_item, list);
@@ -140,7 +140,7 @@ public class AddFormulaActivity extends BaseActivity {
 		private View prepareCardFormulaButtons(View convertView, ViewGroup parent){
 
 			if (buttonsCard == null) {
-				buttonsCard = LayoutInflater.from(mContext).inflate(R.layout.googlecard_add_formula_buttons, parent, false);
+				buttonsCard = LayoutInflater.from(mContext).inflate(R.layout.layout_add_formula_buttons, parent, false);
 				addButton = (Button) buttonsCard.findViewById(R.id.buttton_add_formula);
 				addButton.setOnClickListener(new OnClickListener() {
 					

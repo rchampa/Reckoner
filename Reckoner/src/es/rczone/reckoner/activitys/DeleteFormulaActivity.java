@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.OnNavigationListener;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -17,7 +20,6 @@ import android.widget.Toast;
 
 import com.haarman.listviewanimations.ArrayAdapter;
 import com.haarman.listviewanimations.itemmanipulation.OnDismissCallback;
-import com.haarman.listviewanimations.itemmanipulation.SwipeDismissAdapter;
 import com.haarman.listviewanimations.itemmanipulation.contextualundo.ContextualUndoAdapter;
 import com.haarman.listviewanimations.itemmanipulation.contextualundo.ContextualUndoAdapter.CountDownFormatter;
 import com.haarman.listviewanimations.itemmanipulation.contextualundo.ContextualUndoAdapter.DeleteItemCallback;
@@ -34,6 +36,7 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 	private ArrayList<String> lists;
 	private MyListAdapter mAdapter;
 	private String selectedList = "";
+	private boolean showNames = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +52,28 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		getSupportActionBar().setListNavigationCallbacks(new FormulasListAdapter(), this);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		
-		
-	}
 
-	private void setSwipeDismissAdapter() {
-		SwipeDismissAdapter adapter = new SwipeDismissAdapter(mAdapter, this);
-		adapter.setAbsListView(mListView);
-		mListView.setAdapter(adapter);
 	}
+	
+	@Override
+	 public boolean onCreateOptionsMenu(Menu menu) {
+	     MenuInflater inflater=getMenuInflater();
+	     inflater.inflate(R.menu.delete_formula_menu, menu);
+	     return super.onCreateOptionsMenu(menu);
+
+	 }
+	 @Override
+	 public boolean onOptionsItemSelected(MenuItem item) {
+	     switch(item.getItemId())
+	     {
+	     case R.id.show_names:
+	    	 showNames = !showNames;
+	    	 item.setChecked(showNames);
+	    	 	    	 
+	         break;
+	     }
+	     return true;
+	 }
 
 	@Override
 	public void onDismiss(AbsListView listView, int[] reverseSortedPositions) {
@@ -113,28 +129,6 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 		}
 	}
 
-	/* Non-ListViewAnimations related stuff below */
-
-	/*@Override
-	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-		switch (itemPosition) {
-		case 0:
-			setSwipeDismissAdapter();
-			return true;
-		case 1:
-			setContextualUndoAdapter();
-			return true;
-		case 2:
-			setContextualUndoWithTimedDeleteAdapter();
-			return true;
-		case 3:
-			setContextualUndoWithTimedDeleteAndCountDownAdapter();
-			return true;
-		default:
-			return false;
-		}
-	}*/
-	
 	@Override
 	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 		
@@ -163,7 +157,7 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 			mListView.setAdapter(mAdapter);
 		}
 		
-		setContextualUndoWithTimedDeleteAdapter();
+		setContextualUndoWithTimedDeleteAndCountDownAdapter();
 	}
 	
 	private class MyListAdapter extends ArrayAdapter<Formula> {
@@ -191,7 +185,13 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 			if (tv == null) {
 				tv = (TextView) LayoutInflater.from(mContext).inflate(R.layout.list_row, parent, false);
 			}
-			tv.setText(getItem(position).getFunctionFormula());
+			
+			if(showNames){
+				tv.setText(getItem(position).getName());
+			}
+			else{
+				tv.setText(getItem(position).getFunctionFormula());
+			}
 			return tv;
 		}
 		

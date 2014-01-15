@@ -75,7 +75,7 @@ public class AddListActivity extends BaseActivity {
 		private View prepareCardNameList(View convertView, ViewGroup parent){
 			
 			if (listNameCard == null) {
-				listNameCard = LayoutInflater.from(AddListActivity.this).inflate(R.layout.googlecard_add_list_name, parent, false);
+				listNameCard = LayoutInflater.from(AddListActivity.this).inflate(R.layout.layout_add_list_name, parent, false);
 				listName = (EditText) listNameCard.findViewById(R.id.activity_googlecards_card_et_formula_name);		
 			} 
 			
@@ -86,7 +86,7 @@ public class AddListActivity extends BaseActivity {
 		private View prepareCardListButtons(View convertView, ViewGroup parent){
 
 			if (buttonsCard == null) {
-				buttonsCard = LayoutInflater.from(AddListActivity.this).inflate(R.layout.googlecard_add_list_buttons, parent, false);
+				buttonsCard = LayoutInflater.from(AddListActivity.this).inflate(R.layout.layout_add_list_buttons, parent, false);
 				addButton = (Button) buttonsCard.findViewById(R.id.buttton_addlist_add);
 				addButton.setOnClickListener(new OnClickListener() {
 					
