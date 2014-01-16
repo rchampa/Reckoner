@@ -5,11 +5,86 @@
     <!-- Menu -->
     <string name="menu_animations">Animations</string>
     <string name="menu_parser">Parser</string>
+    <string name="license_op">License</string>
+    <string name="help_op">Help</string>
+    <string name="help">
+		You can use the following features using variables or constants:\n
+        Feature			\t\t\tSyntax		\t\tExamples\n
+		Numbers			\t\t\t1			\t\t\t\t\t42.5\n
+		Variables		\t\t\tx			\t\t\t\t\tvarname\n
+		x powerof y		\t\tx^y			\t\t\t\t3^2 = 9\n
+		Squareroot		\t\tsqrt(x)	\t\tsqrt(9) = 3\n
+		Multiply		\t\t\tx*y 		\t\t\t\t3*2 = 6\n
+		Divide			\t\t\t\tx/y			\t\t\t\t3/2 = 1.5\n
+		Add 			\t\t\t\t\tx + y		\t\t\t3+2 = 5\n
+		Subtract		\t\t\tx - y		\t\t\t3-2 = 1\n
+		Negate			\t\t\t\t-x			\t\t\t\t-3 = 0-3\n
+		Absolutevalue	\t\t\t\t		\tabs(-2) = 2\n
+		Arc-cosine		\t\tacos(x)		\t\tacos(1) = 0\n
+		Arc-sine		\t\t\tasin(x)	\t\tasin(1) = pi/2\n
+		Arc-tangent		\tatan(x)		\t\tatan(1) = pi/4\n
+						\t\t\t\t\t\tatan2(x, y)	\tatan2(-1, -1)\n
+		Natural	logarithm \t\t\t\tlog(x) \n
+		Cosine			\t\t\t\tcos(x)		\t\tcos(0) = 1\n
+		Sine			\t\t\t\t\tsin(x)		\t\t\tsin(pi/2) = 1\n
+		Tangent			\t\t\ttan(x)	\t\ttan(pi/4) = 1 aprox\n
+		e powerof x		\t\texp(x)		\t\texp(1) = 2.7182..\n
+		Floor			\t\t\t\tfloor(x)	\t\t\tfloor(3.5) = 3\n
+						\t\t\t\t\t\t\t\t\t\t\t\tfloor(-3.5) = -4\n
+		Ceiling			\t\t\t\tceil(x)		\t\tceil(3.5) = 4\n
+		
+		Conditionals\n
+		Maximum\t\t			max(x, y)\n
+		Minimum\t\t			min(x, y)\n
+		Rounding\t\t		round(x)\t\tround(3.5) = 4\n
+									\t\tround(-3.5) = -4\n
+
+
+	</string>
+	
+    <string name="license">
+        
+    Copyright 2014 by Ricardo Champa (ricardochampa@gmail.com) All rights reserved.\n
+    Copyright 2013 Niek Haarman (haarman.niek@gmail.com) *check Note1\n
+    Copyright 2002 by Darius Bacon (darius@wry.me) *check Note2\n
     
-    <string name="thanks_animations">Special thanks to Niek Haarman and his library http://nhaarman.github.io/ListViewAnimations/</string>
-    <string name="thanks_parser">Special thanks to Darius Bacon and his library https://github.com/darius/expr</string>
+    \n
+	*Note1 (see more http://nhaarman.github.io/ListViewAnimations)
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at\n
+	
+	http://www.apache.org/licenses/LICENSE-2.0\n
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.\n
+	
+	\n
+	*Note2 (see more https://github.com/darius/expr)
+	Permission is granted to anyone to use this software for any
+	purpose on any computer system, and to redistribute it freely,
+	subject to the following restrictions:\n
+	\n
+	1. The author is not responsible for the consequences of use of
+	   this software, no matter how awful, even if they arise from 
+	   defects in it.
+	\n
+	2. The origin of this software must not be misrepresented, either
+	   by explicit claim or by omission.
+	\n
+	3. Altered versions must be plainly marked as such, and must not
+	   be misrepresented as being the original software.
+	</string>
     
     <string name="show_names">Show names</string>
+    <string name="create_formula">Create a new formula</string>
+    <string name="create_list">Create a new list</string>
+    <string name="show_lists">Show lists</string>
+    <string name="delete_formula">Delete formulas</string>
+    
     
     <!-- haarmananimations -->
     

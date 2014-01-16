@@ -3,9 +3,6 @@ package es.rczone.reckoner.activitys;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import es.rczone.reckoner.R;
 
@@ -19,24 +16,7 @@ public class MainActivity extends Activity {
 
 	}
 
-	 @Override
-	 public boolean onCreateOptionsMenu(Menu menu) {
-	     MenuInflater inflater=getMenuInflater();
-	     inflater.inflate(R.menu.main_menu, menu);
-	     return super.onCreateOptionsMenu(menu);
-
-	 }
-	 @Override
-	 public boolean onOptionsItemSelected(MenuItem item) {
-	     switch(item.getItemId())
-	     {
-	     case R.id.animations:
-	         break;
-	     case R.id.parser:
-	         break;
-	     }
-	     return true;
-	 }
+	
 	public void onClick(View v) {
 		
 		Intent intent;

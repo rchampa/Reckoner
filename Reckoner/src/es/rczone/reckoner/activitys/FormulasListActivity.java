@@ -58,11 +58,6 @@ public class FormulasListActivity extends BaseActivity implements OnNavigationLi
 		mListView = (ListView) findViewById(R.id.activity_mylist_listview);
 		mListView.setDivider(null);
 
-		/*mExpandableListItemAdapter = new MyExpandableListItemAdapter(this, getItems_F());
-		ScaleInAnimationAdapter alphaInAnimationAdapter = new ScaleInAnimationAdapter(mExpandableListItemAdapter);
-		alphaInAnimationAdapter.setAbsListView(mListView);
-		alphaInAnimationAdapter.setInitialDelayMillis(500);
-		mListView.setAdapter(alphaInAnimationAdapter);*/
 	
 		lists = new ListDAO().getAllLists();
 
@@ -71,6 +66,7 @@ public class FormulasListActivity extends BaseActivity implements OnNavigationLi
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		
 		Toast.makeText(this, R.string.explainexpand, Toast.LENGTH_SHORT).show();
+		
 	}
 	
 	public ArrayList<Formula> getItems_F() {
@@ -115,35 +111,46 @@ public class FormulasListActivity extends BaseActivity implements OnNavigationLi
 		@Override
 		public View getTitleView(int position, View convertView, ViewGroup parent) {
 			
-			File f = Tools.getImage(Formula.PATH_FOLDER, items.get(position).getName()+".gif", null);
 			
-			if(f!=null){
-				imageView = (ImageView) convertView;
-				if (imageView == null) {
-					imageView = new ImageView(mContext);
-				}
-				
-				Bitmap bitmap = getBitmapFromMemCache(position);
-				if (bitmap == null) {
+			Bitmap bitmap = getBitmapFromMemCache(position);
+			if (bitmap == null) {
+				File f = Tools.getImage(Formula.PATH_FOLDER, items.get(position).getName()+".gif", null);
+				if(f!=null){
+					
 					bitmap = BitmapFactory.decodeFile(f.getAbsolutePath());
 					double height = bitmap.getHeight()*1.6d;
 					double width = bitmap.getWidth()*1.6d;
 					bitmap = Tools.getResizedBitmap(bitmap, (int)height, (int)width);
 					addBitmapToMemoryCache(position, bitmap);
+					
+					imageView = (ImageView) convertView;
+					if (imageView == null) {
+						imageView = new ImageView(mContext);
+					}
+					
+					imageView.setImageBitmap(bitmap);
+					return imageView;
 				}
-				imageView.setImageBitmap(bitmap);
-				
-				return imageView;
 			}
 			else{
-			
-				textView = (TextView) convertView;
-				if (textView == null) {
-					textView = new TextView(mContext);
+				
+				imageView = (ImageView) convertView;
+				if (imageView == null) {
+					imageView = new ImageView(mContext);
 				}
-				textView.setText(items.get(position).getFunctionFormula());
-				return textView;
+				
+				imageView.setImageBitmap(bitmap);
+				return imageView;
+				
 			}
+		
+			textView = (TextView) convertView;
+			if (textView == null) {
+				textView = new TextView(mContext);
+			}
+			textView.setText(items.get(position).getFunctionFormula());
+			return textView;
+		
 			
 		}
 
@@ -240,10 +247,9 @@ public class FormulasListActivity extends BaseActivity implements OnNavigationLi
 		}
 		else{
 			mExpandableListItemAdapter = new MyExpandableListItemAdapter(this, list.getCopyOfList());
-			/*ScaleInAnimationAdapter anim = new ScaleInAnimationAdapter(mExpandableListItemAdapter);
-			anim.setAbsListView(mListView);
-			anim.setInitialDelayMillis(500);*/
+
 			mListView.setAdapter(mExpandableListItemAdapter);
+			this.setAnimAdapter(mListView, mExpandableListItemAdapter);
 		}
 		
 	}

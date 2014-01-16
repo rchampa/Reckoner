@@ -55,6 +55,16 @@ public class FormulaLayout extends LinearLayout implements OnChangeValueListener
 	@Override
 	public void onChange(MyButton button) {
 		
+		boolean radians = false;
+		
+		String[] procs1 = {"acos", "asin", "atan","atan2", "cos","sin", "tan" };
+		
+		for(String s : procs1){
+			if(formula.contains(s)){
+				radians = true;
+			}
+		}
+		
 		Variable var;
 		for(MyButton b : listButtons){
 			if(b.getState()!=StateButton.READY){
@@ -62,7 +72,10 @@ public class FormulaLayout extends LinearLayout implements OnChangeValueListener
 			}
 			else{
 				var = Variable.make(b.getName());
-				var.setValue(b.getValue());
+				double d = b.getValue();
+				if(radians) 
+					d = Math.toRadians(d);
+				var.setValue(d);
 			}
 		}
 		

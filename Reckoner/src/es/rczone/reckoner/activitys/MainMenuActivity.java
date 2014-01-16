@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -44,10 +47,13 @@ public class MainMenuActivity extends BaseActivity {
 					case 0: intent = new Intent(MainMenuActivity.this, AddFormulaActivity.class);
 				        	startActivity(intent);
 				        	break;
-					case 1: intent = new Intent(MainMenuActivity.this, FormulasListActivity.class);
+					case 1: intent = new Intent(MainMenuActivity.this, AddListActivity.class);
 			            	startActivity(intent);
 			            	break;
-					case 2: intent = new Intent(MainMenuActivity.this, DeleteFormulaActivity.class);
+					case 2: intent = new Intent(MainMenuActivity.this, FormulasListActivity.class);
+			            	startActivity(intent);
+			            	break;
+					case 3: intent = new Intent(MainMenuActivity.this, DeleteFormulaActivity.class);
 			            	startActivity(intent);
 			            	break;
 				}
@@ -56,10 +62,34 @@ public class MainMenuActivity extends BaseActivity {
 		
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	     MenuInflater inflater=getMenuInflater();
+	     inflater.inflate(R.menu.main_menu, menu);
+	     return super.onCreateOptionsMenu(menu);
+
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		Intent intent;
+	     switch(item.getItemId())
+	     {
+		     case R.id.help:	intent = new Intent(MainMenuActivity.this, HelpActivity.class);
+						        	startActivity(intent);
+						        	break;
+		     case R.id.license:		intent = new Intent(MainMenuActivity.this, LicenseActivity.class);
+						        	startActivity(intent);
+						        	break;
+	     }
+	     return true;
+	}
 	private ArrayList<String> getItems() {
 		ArrayList<String> items = new ArrayList<String>();
 		items.add("Formula");
-		items.add("List");
+		items.add("AddList");
+		items.add("ShowLists");
 		items.add("Delete");		
 		return items;
 	}
@@ -69,8 +99,9 @@ public class MainMenuActivity extends BaseActivity {
 		private Context mContext;
 				
 		private View formulaCard;
-		private View formulaSpinnerCard;
-		private View buttonsCard;
+		private View addListCard;
+		private View showListCard;
+		private View deleteCard;
 		
 
 		public AddFormulaAdapter(Context context) {
@@ -84,8 +115,9 @@ public class MainMenuActivity extends BaseActivity {
 						
 			switch(position){
 				case 0: return prepareCardFormulas(convertView, parent);
-				case 1: return prepareCardList(convertView, parent);
-				case 2: return prepareCardDelete(convertView, parent);
+				case 1: return prepareAddListCard(convertView, parent);
+				case 2: return prepareCardList(convertView, parent);
+				case 3: return prepareCardDelete(convertView, parent);
 			}
 			
 			return convertView;
@@ -102,14 +134,23 @@ public class MainMenuActivity extends BaseActivity {
 			return formulaCard;
 		}
 		
-		//Spinner list
-		private View prepareCardList(View convertView, ViewGroup parent){
+		
+		private View prepareAddListCard(View convertView, ViewGroup parent){
 			
-			if (formulaSpinnerCard == null) {
-				formulaSpinnerCard = LayoutInflater.from(mContext).inflate(R.layout.layout_mainmenu_lists, parent, false);
+			if (addListCard == null) {
+				addListCard = LayoutInflater.from(mContext).inflate(R.layout.layout_mainmenu_addlist, parent, false);
 			} 
 			
-			return formulaSpinnerCard;
+			return addListCard;
+		}
+		
+		private View prepareCardList(View convertView, ViewGroup parent){
+			
+			if (showListCard == null) {
+				showListCard = LayoutInflater.from(mContext).inflate(R.layout.layout_mainmenu_lists, parent, false);
+			} 
+			
+			return showListCard;
 		}
 
 		
@@ -117,12 +158,12 @@ public class MainMenuActivity extends BaseActivity {
 		//Buttons Card
 		private View prepareCardDelete(View convertView, ViewGroup parent){
 
-			if (buttonsCard == null) {
-				buttonsCard = LayoutInflater.from(mContext).inflate(R.layout.layout_mainmenu_delete, parent, false);
+			if (deleteCard == null) {
+				deleteCard = LayoutInflater.from(mContext).inflate(R.layout.layout_mainmenu_delete, parent, false);
 				
 			} 
 			
-			return buttonsCard;
+			return deleteCard;
 		}
 
 		

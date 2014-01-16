@@ -990,14 +990,16 @@ containing a value of this type.
         public static final int abc_textfield_searchview_holo_light=0x7f020054;
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020055;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
-        public static final int card_background_white=0x7f020057;
-        public static final int delete_formula=0x7f020058;
-        public static final int formula_icon=0x7f020059;
-        public static final int ic_beer=0x7f02005a;
-        public static final int ic_github=0x7f02005b;
-        public static final int ic_launcher=0x7f02005c;
-        public static final int ic_undo=0x7f02005d;
-        public static final int list_icon=0x7f02005e;
+        public static final int addlist_icon=0x7f020057;
+        public static final int card_background_white=0x7f020058;
+        public static final int delete_formula=0x7f020059;
+        public static final int formula_icon=0x7f02005a;
+        public static final int ic_beer=0x7f02005b;
+        public static final int ic_github=0x7f02005c;
+        public static final int ic_launcher=0x7f02005d;
+        public static final int ic_undo=0x7f02005e;
+        public static final int list_icon=0x7f02005f;
+        public static final int logo=0x7f020060;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f050042;
@@ -1012,29 +1014,27 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050059;
         public static final int activity_animateremoval_button=0x7f05003c;
         public static final int activity_animateremoval_listview=0x7f05003d;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int activity_expandablelistitem_card_content=0x7f05003f;
         public static final int activity_expandablelistitem_card_title=0x7f05003e;
-        public static final int activity_googlecards_card_et_formula=0x7f050049;
-        public static final int activity_googlecards_card_et_formula_name=0x7f05004b;
-        public static final int activity_googlecards_card_et_formulas_list_name=0x7f050051;
+        public static final int activity_googlecards_card_et_formula=0x7f05004a;
+        public static final int activity_googlecards_card_et_formula_name=0x7f05004c;
+        public static final int activity_googlecards_card_et_formulas_list_name=0x7f050052;
         public static final int activity_googlecards_listview=0x7f050041;
         public static final int activity_mylist_listview=0x7f050047;
         public static final int always=0x7f05000b;
-        public static final int animations=0x7f05005a;
         public static final int beginning=0x7f050011;
         public static final int button1=0x7f050043;
         public static final int button2=0x7f050044;
         public static final int button3=0x7f050045;
         public static final int button4=0x7f050046;
-        public static final int buttton_add_formula=0x7f05004a;
-        public static final int buttton_add_formulas_list=0x7f050052;
-        public static final int buttton_addlist_add=0x7f05004d;
-        public static final int buttton_delete_formulas_list=0x7f050050;
-        public static final int buttton_edit_formulas_list=0x7f05004f;
+        public static final int buttton_add_formula=0x7f05004b;
+        public static final int buttton_add_formulas_list=0x7f050053;
+        public static final int buttton_addlist_add=0x7f05004e;
+        public static final int buttton_delete_formulas_list=0x7f050051;
+        public static final int buttton_edit_formulas_list=0x7f050050;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int default_activity_button=0x7f050028;
@@ -1045,23 +1045,24 @@ containing a value of this type.
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
+        public static final int help=0x7f05005a;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
         public static final int icon=0x7f05002a;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
-        public static final int imageView1=0x7f050053;
+        public static final int imageView1=0x7f050054;
+        public static final int license=0x7f05005b;
         public static final int listMode=0x7f050001;
         public static final int list_formulas_picker=0x7f050040;
         public static final int list_item=0x7f050029;
-        public static final int mainmenu_formula=0x7f050054;
-        public static final int mainmenu_list=0x7f050055;
+        public static final int mainmenu_formula=0x7f050055;
+        public static final int mainmenu_list=0x7f050056;
         public static final int menu_expandable_limit=0x7f05005c;
         public static final int middle=0x7f050012;
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
-        public static final int parser=0x7f05005b;
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
         public static final int radio=0x7f05002f;
@@ -1079,17 +1080,18 @@ containing a value of this type.
         public static final int showCustom=0x7f050007;
         public static final int showHome=0x7f050004;
         public static final int showTitle=0x7f050006;
-        public static final int show_names=0x7f050058;
-        public static final int spinner=0x7f05004e;
-        public static final int spinner_add_formula=0x7f05004c;
+        public static final int show_names=0x7f050059;
+        public static final int spinner=0x7f05004f;
+        public static final int spinner_add_formula=0x7f05004d;
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
         public static final int tabMode=0x7f050002;
+        public static final int textView1=0x7f050048;
         public static final int title=0x7f05002b;
         public static final int top_action_bar=0x7f050020;
-        public static final int tv_item_formula=0x7f050048;
-        public static final int undo_row_texttv=0x7f050056;
-        public static final int undo_row_undobutton=0x7f050057;
+        public static final int tv_item_formula=0x7f050049;
+        public static final int undo_row_texttv=0x7f050057;
+        public static final int undo_row_undobutton=0x7f050058;
         public static final int up=0x7f050021;
         public static final int useLogo=0x7f050003;
         public static final int withText=0x7f05000c;
@@ -1148,24 +1150,28 @@ containing a value of this type.
         public static final int activity_expandablelistitem_card=0x7f030019;
         public static final int activity_formulas_picker=0x7f03001a;
         public static final int activity_googlecards=0x7f03001b;
-        public static final int activity_main=0x7f03001c;
-        public static final int activity_mylist=0x7f03001d;
-        public static final int item_formula=0x7f03001e;
-        public static final int layout_add_formula=0x7f03001f;
-        public static final int layout_add_formula_buttons=0x7f030020;
-        public static final int layout_add_formula_name=0x7f030021;
-        public static final int layout_add_formula_spinner_formulas_list=0x7f030022;
-        public static final int layout_add_list_buttons=0x7f030023;
-        public static final int layout_add_list_name=0x7f030024;
-        public static final int layout_formulas_list_buttons=0x7f030025;
-        public static final int layout_formulas_list_name=0x7f030026;
-        public static final int layout_mainmenu_delete=0x7f030027;
-        public static final int layout_mainmenu_formulas=0x7f030028;
-        public static final int layout_mainmenu_lists=0x7f030029;
-        public static final int list_row=0x7f03002a;
-        public static final int support_simple_spinner_dropdown_item=0x7f03002b;
-        public static final int test_image=0x7f03002c;
-        public static final int undo_row=0x7f03002d;
+        public static final int activity_help=0x7f03001c;
+        public static final int activity_license=0x7f03001d;
+        public static final int activity_main=0x7f03001e;
+        public static final int activity_mylist=0x7f03001f;
+        public static final int activity_splash=0x7f030020;
+        public static final int item_formula=0x7f030021;
+        public static final int layout_add_formula=0x7f030022;
+        public static final int layout_add_formula_buttons=0x7f030023;
+        public static final int layout_add_formula_name=0x7f030024;
+        public static final int layout_add_formula_spinner_formulas_list=0x7f030025;
+        public static final int layout_add_list_buttons=0x7f030026;
+        public static final int layout_add_list_name=0x7f030027;
+        public static final int layout_formulas_list_buttons=0x7f030028;
+        public static final int layout_formulas_list_name=0x7f030029;
+        public static final int layout_mainmenu_addlist=0x7f03002a;
+        public static final int layout_mainmenu_delete=0x7f03002b;
+        public static final int layout_mainmenu_formulas=0x7f03002c;
+        public static final int layout_mainmenu_lists=0x7f03002d;
+        public static final int list_row=0x7f03002e;
+        public static final int support_simple_spinner_dropdown_item=0x7f03002f;
+        public static final int test_image=0x7f030030;
+        public static final int undo_row=0x7f030031;
     }
     public static final class menu {
         public static final int delete_formula_menu=0x7f0d0000;
@@ -1216,57 +1222,63 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
-        public static final int action_settings=0x7f0a0013;
-        public static final int animateremoval=0x7f0a001d;
+        public static final int action_settings=0x7f0a0019;
+        public static final int animateremoval=0x7f0a0023;
         /**  haarmananimations 
          */
-        public static final int app_name=0x7f0a0012;
-        public static final int appearance=0x7f0a0017;
-        public static final int buttton_add_formula=0x7f0a0027;
-        public static final int buttton_add_formulasList=0x7f0a002f;
-        public static final int buttton_add_list=0x7f0a002c;
-        public static final int buttton_add_variable=0x7f0a0029;
-        public static final int buttton_add_variables=0x7f0a0028;
-        public static final int buttton_addlist_finish=0x7f0a002d;
-        public static final int buttton_delete_formulasList=0x7f0a0031;
-        public static final int buttton_edit_formulasList=0x7f0a0030;
-        public static final int buttton_finish=0x7f0a002a;
+        public static final int app_name=0x7f0a0018;
+        public static final int appearance=0x7f0a001d;
+        public static final int buttton_add_formula=0x7f0a002d;
+        public static final int buttton_add_formulasList=0x7f0a0035;
+        public static final int buttton_add_list=0x7f0a0032;
+        public static final int buttton_add_variable=0x7f0a002f;
+        public static final int buttton_add_variables=0x7f0a002e;
+        public static final int buttton_addlist_finish=0x7f0a0033;
+        public static final int buttton_delete_formulasList=0x7f0a0037;
+        public static final int buttton_edit_formulasList=0x7f0a0036;
+        public static final int buttton_finish=0x7f0a0030;
         /**  FormulasPickerActivity 
          */
-        public static final int buttton_save_formulasList=0x7f0a0033;
-        public static final int countdown_dismissing=0x7f0a0024;
-        public static final int draganddrop=0x7f0a001b;
+        public static final int buttton_save_formulasList=0x7f0a0039;
+        public static final int countdown_dismissing=0x7f0a002a;
+        public static final int create_formula=0x7f0a0014;
+        public static final int create_list=0x7f0a0015;
+        public static final int delete_formula=0x7f0a0017;
+        public static final int draganddrop=0x7f0a0021;
         /**  Add FormulaActivity 
          */
-        public static final int et_hint_formula=0x7f0a0025;
-        public static final int et_hint_name_formula=0x7f0a0026;
+        public static final int et_hint_formula=0x7f0a002b;
+        public static final int et_hint_name_formula=0x7f0a002c;
         /**  AddListActivity 
          */
-        public static final int et_hint_name_list=0x7f0a002b;
-        public static final int expandablelistitemadapter=0x7f0a001f;
-        public static final int expandorcollapsecard=0x7f0a0023;
-        public static final int explainexpand=0x7f0a0022;
-        public static final int googlecards=0x7f0a0015;
-        public static final int gridview=0x7f0a0016;
-        public static final int gridviewexample=0x7f0a001a;
-        public static final int hello_world=0x7f0a0014;
+        public static final int et_hint_name_list=0x7f0a0031;
+        public static final int expandablelistitemadapter=0x7f0a0025;
+        public static final int expandorcollapsecard=0x7f0a0029;
+        public static final int explainexpand=0x7f0a0028;
+        public static final int googlecards=0x7f0a001b;
+        public static final int gridview=0x7f0a001c;
+        public static final int gridviewexample=0x7f0a0020;
+        public static final int hello_world=0x7f0a001a;
+        public static final int help=0x7f0a0011;
+        public static final int help_op=0x7f0a0010;
         /**  FormulasListActivity 
          */
-        public static final int hint_formulasList_name=0x7f0a002e;
-        public static final int itemdeleted=0x7f0a0020;
-        public static final int itemmanipulation=0x7f0a0019;
-        public static final int limit=0x7f0a0018;
+        public static final int hint_formulasList_name=0x7f0a0034;
+        public static final int itemdeleted=0x7f0a0026;
+        public static final int itemmanipulation=0x7f0a001f;
+        public static final int license=0x7f0a0012;
+        public static final int license_op=0x7f0a000f;
+        public static final int limit=0x7f0a001e;
         /**  Menu 
          */
         public static final int menu_animations=0x7f0a000d;
         public static final int menu_parser=0x7f0a000e;
-        public static final int removeselected=0x7f0a001e;
-        public static final int show_names=0x7f0a0011;
-        public static final int spinner_prompt_formulasList=0x7f0a0032;
-        public static final int swipedismiss=0x7f0a001c;
-        public static final int taptoundo=0x7f0a0021;
-        public static final int thanks_animations=0x7f0a000f;
-        public static final int thanks_parser=0x7f0a0010;
+        public static final int removeselected=0x7f0a0024;
+        public static final int show_lists=0x7f0a0016;
+        public static final int show_names=0x7f0a0013;
+        public static final int spinner_prompt_formulasList=0x7f0a0038;
+        public static final int swipedismiss=0x7f0a0022;
+        public static final int taptoundo=0x7f0a0027;
     }
     public static final class style {
         /** 

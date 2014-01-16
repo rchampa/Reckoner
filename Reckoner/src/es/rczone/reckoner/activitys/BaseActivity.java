@@ -20,7 +20,7 @@ public class BaseActivity extends ActionBarActivity {
 			getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 		}
 		super.onCreate(savedInstanceState);
-		
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class BaseActivity extends ActionBarActivity {
 		
 		AnimationAdapter animAdapter = new ScaleInAnimationAdapter(adapter);
 		animAdapter.setAbsListView(listview);
-		animAdapter.setInitialDelayMillis(500);
+		animAdapter.setInitialDelayMillis(200);
 		listview.setAdapter(animAdapter);
 	}
 }
