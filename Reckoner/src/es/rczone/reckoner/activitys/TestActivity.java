@@ -48,7 +48,7 @@ public class TestActivity extends Activity {
     		 //http://latex.codecogs.com/gif.latex?3*x/(4+2)
     		   
     		   
-    		   File f = Tools.getImage("/sdcard/app/tmp/","f3.gif", "http://latex.codecogs.com/gif.latex?%5Chuge%20(3*x^3)/(4+2)+2+1+1+2+3+x-y");
+    		   File f = Tools.getImage("/sdcard/app/tmp/","f3.gif", "http://latex.codecogs.com/gif.latex?%5Cdpi%7B300%7D%20%5Chuge%202(3*x^3)/(4+2)+2+1+1+2+3+x-y");
     			final Bitmap bitmap = BitmapFactory.decodeFile(f.getAbsolutePath());
     			
     			

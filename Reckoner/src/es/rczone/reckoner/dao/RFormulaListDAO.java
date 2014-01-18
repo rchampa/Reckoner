@@ -40,7 +40,6 @@ public class RFormulaListDAO {
 		cursor.close();
 		db.close();
 		
-		if(valueObject.size()==0) return null;
 		
 		return valueObject;
 	}

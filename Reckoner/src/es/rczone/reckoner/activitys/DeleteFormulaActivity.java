@@ -7,17 +7,20 @@ import java.util.Arrays;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.util.LruCache;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.OnNavigationListener;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,10 +29,11 @@ import android.widget.Toast;
 import com.haarman.listviewanimations.ArrayAdapter;
 import com.haarman.listviewanimations.itemmanipulation.OnDismissCallback;
 import com.haarman.listviewanimations.itemmanipulation.contextualundo.ContextualUndoAdapter;
-import com.haarman.listviewanimations.itemmanipulation.contextualundo.ContextualUndoAdapter.CountDownFormatter;
 import com.haarman.listviewanimations.itemmanipulation.contextualundo.ContextualUndoAdapter.DeleteItemCallback;
 
 import es.rczone.reckoner.R;
+import es.rczone.reckoner.ReckonerApp;
+import es.rczone.reckoner.dao.FormulaDAO;
 import es.rczone.reckoner.dao.ListDAO;
 import es.rczone.reckoner.dao.RFormulaListDAO;
 import es.rczone.reckoner.model.Formula;
@@ -43,6 +47,7 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 	private MyListAdapter mAdapter;
 	private String selectedList = "";
 	private boolean showNames = false;
+	private LruCache<Integer, Bitmap> mMemoryCache;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +55,26 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 		setContentView(R.layout.activity_mylist);
 		
 		mListView = (ListView) findViewById(R.id.activity_mylist_listview);
-		//mListView.setDivider(null);
-		mListView.setDivider(new ColorDrawable(0xFFC9C9C9));
-		mListView.setDividerHeight(10);
-		
+		mListView.setDivider(null);
+
 		lists = new ListDAO().getAllLists();
 		
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		getSupportActionBar().setListNavigationCallbacks(new FormulasListAdapter(), this);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		
+		
+		mListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				String name = mAdapter.getItem(position).getName();
+				String formula = mAdapter.getItem(position).getFunctionFormula();
+				Toast.makeText(DeleteFormulaActivity.this, name + ": "+formula, Toast.LENGTH_SHORT).show();
+			}
+		});
+		
+	
 	}
 	
 	@Override
@@ -93,32 +108,23 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 	public void deleteItem(int position) {
 		
 		Formula f = mAdapter.getItem(position); 
-		
+		Log.d("delete", f.getName());
+		Log.d("delete", f.getFunctionFormula());
 		new RFormulaListDAO().delete(selectedList, f.getName());
+		new FormulaDAO().delete(f);
 		
 		mAdapter.remove(position);
 		mAdapter.notifyDataSetChanged();
+		
+		if(mMemoryCache!=null)
+			mMemoryCache.evictAll();
 	}
 	
-	private void setContextualUndoWithTimedDeleteAndCountDownAdapter() {
-		ContextualUndoAdapter adapter = new ContextualUndoAdapter(mAdapter, R.layout.undo_row, R.id.undo_row_undobutton, 3000, R.id.undo_row_texttv, new MyFormatCountDownCallback());
+	private void setContextualUndoWithTimedDeleteAdapter() {
+		ContextualUndoAdapter adapter = new ContextualUndoAdapter(mAdapter, R.layout.undo_row, R.id.undo_row_undobutton, 3000);
 		adapter.setAbsListView(mListView);
 		mListView.setAdapter(adapter);
 		adapter.setDeleteItemCallback(this);
-	}
-
-
-	private class MyFormatCountDownCallback implements CountDownFormatter {
-
-		@Override
-		public String getCountDownString(long millisUntilFinished) {
-			int seconds = (int) Math.ceil((millisUntilFinished / 1000.0));
-
-			if (seconds > 0) {
-				return getResources().getQuantityString(R.plurals.countdown_seconds, seconds, seconds);
-			}
-			return getString(R.string.countdown_dismissing);
-		}
 	}
 
 	@Override
@@ -147,7 +153,7 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 			this.setAnimAdapter(mListView, mAdapter);
 		}
 		
-		setContextualUndoWithTimedDeleteAndCountDownAdapter();
+		setContextualUndoWithTimedDeleteAdapter();
 	}
 	
 	private class MyListAdapter extends ArrayAdapter<Formula> {
@@ -173,6 +179,8 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 					return bitmap.getRowBytes() * bitmap.getHeight() / 1024;
 				}
 			};
+			
+			DeleteFormulaActivity.this.mMemoryCache = mMemoryCache;
 		}
 
 		@Override
@@ -195,6 +203,8 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 					tv = (TextView) LayoutInflater.from(mContext).inflate(R.layout.list_row, parent, false);
 				}
 				tv.setText(getItem(position).getName());
+				tv.setBackgroundResource(R.drawable.card_background_white);
+				tv.setGravity(Gravity.CENTER);
 				return tv;
 			}
 			else{
@@ -205,7 +215,9 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 				
 				Bitmap bitmap = getBitmapFromMemCache(position);
 				if (bitmap == null) {
-					File f = Tools.getImage(Formula.PATH_FOLDER, getItem(position).getName()+".gif", null);
+					//File f = Tools.getImage(Formula.PATH_FOLDER, getItem(position).getName()+".gif", null);
+					File f = Tools.getImageFromInternal(ReckonerApp.getContext(), getItem(position).getName()+".gif", null);
+					
 					if(f!=null){
 						bitmap = BitmapFactory.decodeFile(f.getAbsolutePath());
 						double height = bitmap.getHeight()*2d;
@@ -220,10 +232,17 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 							tv = (TextView) LayoutInflater.from(mContext).inflate(R.layout.list_row, parent, false);
 						}
 						tv.setText(getItem(position).getName());
+						tv.setBackgroundResource(R.drawable.card_background_white);
+						tv.setGravity(Gravity.CENTER);
 						return tv;
 					}
 				}
 				imageView.setImageBitmap(bitmap);
+				float scale = getResources().getDisplayMetrics().density;
+				int dpAsPixels = (int) (10*scale + 0.5f);
+				
+				imageView.setBackgroundResource(R.drawable.card_background_white);
+				imageView.setPadding(0, dpAsPixels, 0, dpAsPixels);
 				return imageView;
 				
 			}
@@ -236,6 +255,11 @@ public class DeleteFormulaActivity extends BaseActivity implements OnNavigationL
 
 		private Bitmap getBitmapFromMemCache(int key) {
 			return mMemoryCache.get(key);
+		}
+		@Override
+		public void clear(){
+			mMemoryCache.evictAll();
+			super.clear();
 		}
 		
 	}

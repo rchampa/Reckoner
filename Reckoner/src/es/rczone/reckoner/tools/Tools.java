@@ -13,6 +13,7 @@ import java.util.Date;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -65,6 +66,50 @@ public class Tools {
 	public static int powerOfTwo(int exp) {
 
 		return (int) Math.pow(2, exp);
+		
+	}
+	
+	public static boolean delete(Context context, String filename){
+		
+		ContextWrapper cw = new ContextWrapper(context);
+		File directory = cw.getDir("media", Context.MODE_PRIVATE);
+		
+		File img = new File(directory.getAbsolutePath() +"/" +filename);
+		boolean deleted = img.delete();
+		
+		return deleted;
+		
+	}
+	public static File getImageFromInternal(Context context, String filename, String url){
+		ContextWrapper cw = new ContextWrapper(context);
+		File directory = cw.getDir("media", Context.MODE_PRIVATE);
+		
+		File img = new File(directory.getAbsolutePath() +"/" + filename);
+
+		// solo se descargan nuevas imagenes
+		if (!img.exists()) {
+			try {
+				if("".equals(url) || url ==null)
+					return null;
+				URL imageUrl = new URL(url);
+				InputStream in = imageUrl.openStream();
+				OutputStream out = new BufferedOutputStream(
+						new FileOutputStream(img));
+
+				for (int b; (b = in.read()) != -1;) {
+					out.write(b);
+				}
+				out.close();
+				in.close();
+			} catch (MalformedURLException e) {
+				Log.e("Buscador", "Malformed URLException capturado : " + e);
+				img = null;
+			} catch (IOException e) {
+				Log.e("Buscador", "IOException capturado : " + e);
+				img = null;
+			}
+		}
+		return img;
 	}
 
 	// Funcion que devuelve un objeto File de una imagen descargada desde el
@@ -77,11 +122,12 @@ public class Tools {
 
 		File img = new File(pathFolder + localFilename);
 
-		// Se crea el directorio sino existe
-		new File(pathFolder).mkdirs();
-
 		// solo se descargan nuevas imagenes
 		if (!img.exists()) {
+			
+			// Se crea el directorio sino existe
+			new File(pathFolder).mkdirs();
+
 			try {
 				if("".equals(url) || url ==null)
 					return null;
@@ -121,4 +167,9 @@ public class Tools {
 	    return resizedBitmap;
 	}
 
+	public static int pixelsTOdp(Context c, int n){
+		float scale = c.getResources().getDisplayMetrics().density;
+		int dpAsPixels = (int) (n*scale + 0.5f);
+		return dpAsPixels;
+	}
 }

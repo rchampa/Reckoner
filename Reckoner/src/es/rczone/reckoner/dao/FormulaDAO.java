@@ -8,7 +8,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import es.rczone.reckoner.ReckonerApp;
 import es.rczone.reckoner.model.Formula;
+import es.rczone.reckoner.tools.Tools;
 
 
 public class FormulaDAO {
@@ -192,6 +194,7 @@ public class FormulaDAO {
 		SQLiteDatabase db = new DatabaseHelper().getWritableDatabase();
 		db.delete(TABLE, NAME+"=?", new String[]{name});
 		db.close();
+		Tools.delete(ReckonerApp.getContext(), name+".gif");
 	}
 	
 	//Remove

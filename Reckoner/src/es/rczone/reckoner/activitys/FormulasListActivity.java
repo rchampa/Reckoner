@@ -27,6 +27,7 @@ import com.haarman.listviewanimations.ArrayAdapter;
 import com.haarman.listviewanimations.itemmanipulation.ExpandableListItemAdapter;
 
 import es.rczone.reckoner.R;
+import es.rczone.reckoner.ReckonerApp;
 import es.rczone.reckoner.activitys.customlayouts.FormulaLayout;
 import es.rczone.reckoner.dao.FormulaDAO;
 import es.rczone.reckoner.dao.ListDAO;
@@ -114,13 +115,15 @@ public class FormulasListActivity extends BaseActivity implements OnNavigationLi
 			
 			Bitmap bitmap = getBitmapFromMemCache(position);
 			if (bitmap == null) {
-				File f = Tools.getImage(Formula.PATH_FOLDER, items.get(position).getName()+".gif", null);
+				//File f = Tools.getImage(Formula.PATH_FOLDER, items.get(position).getName()+".gif", null);
+				File f = Tools.getImageFromInternal(ReckonerApp.getContext(), items.get(position).getName()+".gif", null);
+				
 				if(f!=null){
 					
 					bitmap = BitmapFactory.decodeFile(f.getAbsolutePath());
-					double height = bitmap.getHeight()*1.6d;
+					/*double height = bitmap.getHeight()*1.6d;
 					double width = bitmap.getWidth()*1.6d;
-					bitmap = Tools.getResizedBitmap(bitmap, (int)height, (int)width);
+					bitmap = Tools.getResizedBitmap(bitmap, (int)height, (int)width);*/
 					addBitmapToMemoryCache(position, bitmap);
 					
 					imageView = (ImageView) convertView;

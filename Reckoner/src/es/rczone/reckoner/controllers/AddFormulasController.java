@@ -8,9 +8,9 @@ import android.util.Log;
 import android.util.SparseArray;
 import es.rczone.dariuslib.me.Parser;
 import es.rczone.dariuslib.me.SyntaxException;
+import es.rczone.reckoner.ReckonerApp;
 import es.rczone.reckoner.activitys.AddFormulaActivity;
 import es.rczone.reckoner.dao.FormulaDAO;
-import es.rczone.reckoner.dao.RFormulaListDAO;
 import es.rczone.reckoner.model.Formula;
 import es.rczone.reckoner.tools.Tools;
 
@@ -22,7 +22,7 @@ public class AddFormulasController extends Controller{
 	private HandlerThread workerThread;
 	private Handler workerHandler;
 	
-	
+	public static String URL_LAtEX = "http://latex.codecogs.com/gif.latex?%5Cdpi%7B300%7D%20%5Chuge%20";
 	public static final int MESSAGE_ADD_FORMULA = 13;
 	public static final int MESSAGE_TO_VIEW_MODEL_UPDATED = 21;
 
@@ -118,17 +118,26 @@ public class AddFormulasController extends Controller{
 			FormulaDAO dao = new FormulaDAO();
 			query = dao.insertRel(f, listName);
 			
+			if(query==false){
+				errorMessage="An error has ocurred, the formula was not added.";
+			}
+			
 			workerHandler.post(new Runnable() {
 				@Override
 				public void run() {
-					Tools.getImage(Formula.PATH_FOLDER, name+".gif", "http://latex.codecogs.com/gif.latex?%5Chuge%20"+formula);    			
+					//Tools.getImage(Formula.PATH_FOLDER, name+".gif", "http://latex.codecogs.com/gif.latex?%5Chuge%20"+formula);  
+					//Tools.getImage(Formula.PATH_FOLDER, name+".gif", "http://latex.codecogs.com/gif.latex?%5Cdpi%7B300%7D%20%5Chuge%20"+formula);
+					Tools.getImageFromInternal(ReckonerApp.getContext(), name+".gif", URL_LAtEX+formula);
+					
 				}
 			});
 			
 		}
 		else{
-			RFormulaListDAO dao = new RFormulaListDAO();
-			query = dao.insert(listName, name);
+//			RFormulaListDAO dao = new RFormulaListDAO();
+//			query = dao.insert(listName, name);
+			errorMessage = "The name is already used.";
+			return false;
 		}
 		
 		return query;
