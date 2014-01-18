@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="es.rczone.reckoner"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="0.1" >
 
     <uses-sdk
         android:minSdkVersion="10"
@@ -12,13 +12,13 @@
      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name="es.rczone.reckoner.ReckonerApp"
+        android:name="es.rczone.reckoner.math.ReckonerApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="es.rczone.reckoner.activitys.SplashActivity"
+            android:name="es.rczone.reckoner.math.activitys.SplashActivity"
             android:label="@string/app_name"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize"
             android:windowSoftInputMode="adjustPan" >
@@ -30,7 +30,7 @@
         </activity>
         
         <activity
-            android:name="es.rczone.reckoner.activitys.MainMenuActivity"
+            android:name="es.rczone.reckoner.math.activitys.MainMenuActivity"
             android:label="@string/app_name" 
 			android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize"
 			android:windowSoftInputMode="adjustPan"
@@ -38,7 +38,7 @@
         </activity>
         
         <activity
-            android:name="es.rczone.reckoner.activitys.AddFormulaActivity"
+            android:name="es.rczone.reckoner.math.activitys.AddFormulaActivity"
             android:label="@string/app_name" 
 			android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize"
 			android:windowSoftInputMode="adjustPan"
@@ -46,7 +46,7 @@
         </activity>
         
         <activity
-            android:name="es.rczone.reckoner.activitys.AddListActivity"
+            android:name="es.rczone.reckoner.math.activitys.AddListActivity"
             android:label="@string/app_name" 
 			android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize"
 			android:windowSoftInputMode="adjustPan"
@@ -54,7 +54,7 @@
         </activity>
         
         <activity
-            android:name="es.rczone.reckoner.activitys.FormulasListActivity"
+            android:name="es.rczone.reckoner.math.activitys.FormulasListActivity"
             android:label="@string/app_name" 
 			android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize"
 			android:windowSoftInputMode="adjustPan"
@@ -63,7 +63,7 @@
         
         
         <activity
-            android:name="es.rczone.reckoner.activitys.AddFormultaToList"
+            android:name="es.rczone.reckoner.math.activitys.AddFormultaToList"
             android:label="@string/app_name" 
 			android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize"
 			android:windowSoftInputMode="adjustPan"
@@ -71,7 +71,7 @@
         </activity>
         
         <activity
-            android:name="es.rczone.reckoner.activitys.DeleteFormulaActivity"
+            android:name="es.rczone.reckoner.math.activitys.DeleteFormulaActivity"
             android:label="@string/app_name" 
 			android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize"
 			android:windowSoftInputMode="adjustPan"
@@ -79,7 +79,7 @@
         </activity>
         
         <activity
-            android:name="es.rczone.reckoner.activitys.TestActivity"
+            android:name="es.rczone.reckoner.math.activitys.TestActivity"
             android:label="@string/app_name" 
 			android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize"
 			android:windowSoftInputMode="adjustPan"
@@ -87,7 +87,7 @@
         </activity>
         
         <activity
-            android:name="es.rczone.reckoner.activitys.AddFormulasListActivity"
+            android:name="es.rczone.reckoner.math.activitys.AddFormulasListActivity"
             android:label="@string/app_name" 
 			android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize"
 			android:windowSoftInputMode="adjustPan"
@@ -95,7 +95,7 @@
         </activity>
         
         <activity
-            android:name="es.rczone.reckoner.activitys.FormulasDeleteItemsActivity"
+            android:name="es.rczone.reckoner.math.activitys.FormulasDeleteItemsActivity"
             android:label="@string/app_name" 
 			android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize"
 			android:windowSoftInputMode="adjustPan"
@@ -103,8 +103,8 @@
         </activity>
         
       
-         <activity android:name="es.rczone.reckoner.activitys.HelpActivity" android:label="@string/app_name" android:theme="@android:style/Theme.Dialog"></activity>
-         <activity android:name="es.rczone.reckoner.activitys.LicenseActivity" android:label="@string/app_name" android:theme="@android:style/Theme.Dialog"></activity>
+         <activity android:name="es.rczone.reckoner.math.activitys.HelpActivity" android:label="@string/app_name" android:theme="@android:style/Theme.Dialog"></activity>
+         <activity android:name="es.rczone.reckoner.math.activitys.LicenseActivity" android:label="@string/app_name" android:theme="@android:style/Theme.Dialog"></activity>
         
     </application>
 
