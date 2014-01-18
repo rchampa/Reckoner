@@ -88,16 +88,12 @@
     
     <!-- haarmananimations -->
     
-    <string name="app_name">Reckoner</string>
+    <string name="app_name">My formulas</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     
-    <string name="googlecards">Google cards example</string>
-    <string name="gridview">GridView example</string>
     <string name="appearance">Appearance Animation</string>
     <string name="limit">Limit to 2</string>
     <string name="itemmanipulation">Item Manipulation</string>
-    <string name="gridviewexample">GridView example</string>
     <string name="draganddrop">Drag and Drop</string>
     <string name="swipedismiss">Swipe to dismiss</string>
     <string name="animateremoval">Animate dismiss</string>
